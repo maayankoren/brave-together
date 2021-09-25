@@ -102,7 +102,9 @@ class Testimony extends React.Component {
     handelSelectionChange = () => {
         //chack text "selection = window.getSelection().toString();"
         const freeSelection = window.getSelection().toString()
-        this.setState({ freeSelection })
+        if (freeSelection) {
+            this.setState({ freeSelection })
+        }
     }
 
     setButtonContent = (choice) => {
