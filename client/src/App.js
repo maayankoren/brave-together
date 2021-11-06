@@ -13,7 +13,6 @@ import Share from './share/share';
 import About from './about/about';
 import Footer from './footer/footer'
 import Homepage from './homepage/homepage';
-
 //import BackButton from './backButton/backButton';
 import ThankYouForComing from './thankYouForComing/thankYouForComing';
 import Header from './header/header';

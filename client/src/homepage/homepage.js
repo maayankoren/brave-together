@@ -1,8 +1,11 @@
 import React from 'react';
-
+import { useHistory } from "react-router-dom";
 import './homepage.scss';
 
-const Homepage = () => {
+
+function Homepage() {
+
+    let history = useHistory();
 
     const onStartButtonClick = () => {
         let token = localStorage.getItem('token');
@@ -16,8 +19,9 @@ const Homepage = () => {
         }
         */
         //for development, moving directly to storyCheck even without token..
-        this.props.history.push({
-            pathname: `/storyCheck`,
+
+        history.push({
+            pathname: '/storyCheck',
             state: {
                 template: { id: 1, backgroundImg: 'images/frame2.png', templateImg: `images/template1.png` }
             }
@@ -79,9 +83,9 @@ const Homepage = () => {
                 {data.developmentInfo.versions[1].number}: <br />
                 {data.developmentInfo.versions[1].members}
             </div>
-            <button onClick={() => this.onStartButtonClick()}>בואו נתחיל</button>
+            <button onClick={onStartButtonClick}>בואו נתחיל</button>
         </div>
     );
 }
 
-export default Homepage
+export default Homepage;

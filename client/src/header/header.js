@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./header.scss";
 
-const Header = () => {
+function Header() {
 
   const [isSignedIn, setSignIn] = useState(false);
 
@@ -15,6 +15,25 @@ const Header = () => {
       setSignIn(false);
     }
   }, [])
+
+  // var data = () => fetch('http://127.0.0.1:5000/header')
+  // .then(response => response.json())
+  // // .then((jsonData) => {
+  // //   console.log(jsonData)
+  // // })
+  // .catch((error) => {
+  //   console.error(error)
+  // });
+
+  // async function getDataFromServer() {
+  //   try {
+  //     let response = await fetch('http://127.0.0.1:5000/header');
+  //     let responseJson = await response.json();
+  //     return responseJson;
+  //    } catch(error) {
+  //     console.error(error);
+  //   }
+  // }
 
   let data = {
     "header": {
@@ -58,7 +77,7 @@ const Header = () => {
           "tooltip": "עלינו...",
           "color": "white"
         },],
-    },
+    }
   }
 
   return (
@@ -75,4 +94,4 @@ const Header = () => {
 
 }
 
-export default Header
+export default Header;
