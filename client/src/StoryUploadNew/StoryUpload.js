@@ -1,10 +1,16 @@
 import React, { useState ,useEffect} from 'react'
 import { WithContext as ReactTags } from 'react-tag-input'
-
-
+import { useForm } from 'react-hook-form'
+import {yupResolver} from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 import './StoryUpload.css'
 import s from './mockForm.json'
 
+
+// const schema = yup.object().shape({
+//     title: yup.string().required("שדה זה הינו שדה חובה."),
+//     content : yup.
+// });
 const INITIAL_SUG = [
     {id:"1" , text:"sug-1"},
     {id:"2" , text:"sug-2"}

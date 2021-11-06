@@ -10,15 +10,18 @@
             {
                 "label":"כותרת",
                 "tag":"input",
-                "type":"text"
+                "type":"text",
+                "name": "title"
             },{
                 "label":"תוכן",
                 "tag":"textarea",
                 "rows":"4",
-                "cols":"50"
+                "cols":"50",
+                "name":"content"
             },
             {
                 "label":"תגיות",
+                "name":"tags",
                 "tag":"ReactTags",
                 "tags":[
                     {"id":"1","text":"tag-1"},
@@ -37,6 +40,7 @@
             },
             {
                 "label":"קטגוריה",
+                "name":"category",
                 "tag" :"select",
                 "options":[
                     "1",

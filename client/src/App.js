@@ -5,6 +5,7 @@ import { Switch, Route, BrowserRouter, withRouter } from 'react-router-dom';
 //import { NativeRouter, BackButton } from 'react-router-native';
 import Template from './template/template';
 import StoryCheck from './storyCheck/storyCheck';
+import UnAuthorizedPage from './errors/UnAuthorizedPage'
 import Testimony from './testimony/testimony';
 import TextEdit from './text/text';
 import StoryUpload from './StoryUploadNew/StoryUpload';
@@ -20,6 +21,7 @@ import Header from './header/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
+import ProtectedRoute from './protectedRoute/ProtectedRoute';
 
 function App() {
   return (
@@ -30,7 +32,8 @@ function App() {
         <Route exact path='/storyCheck' component={StoryCheck} />
         <Route exact path='/testimony' component={Testimony} />
         <Route exact path='/textEdit' component={TextEdit} />
-        <Route exact path='/storyUpload' component={StoryUpload} />
+        <ProtectedRoute exact path='/storyUpload' component={StoryUpload} />
+        <Route exact path='/unauthorized' component={UnAuthorizedPage}/>
         <Route exact path='/templateEdit' component={TemplateEdit} />
         <Route exact path='/share' component={Share} />
         <Route exact path='/thankYouForComing' component={ThankYouForComing} />
