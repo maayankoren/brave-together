@@ -22,8 +22,7 @@ export default function login() {
             "#העצמה_אחת_ביום",
             "בהשראת סיפורי הגיבורים והגיבורות שלנו"],
             "color": "black",
-        }
-
+        },
     }
 
     return (
@@ -39,6 +38,8 @@ export default function login() {
             }}
         >
         <Box sx={{ fontSize: 20 }}>{data.header.content.join('\n')}</Box>
+        <img src="/logo1.png" alt="logo" />
+        {/* <img src={process.env.PUBLIC_URL + '/yourPathHere.jpg'} />  */}
             
 
         </Box>
