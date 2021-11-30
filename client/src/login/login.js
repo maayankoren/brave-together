@@ -3,6 +3,7 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import { spacing } from '@mui/system';
 
@@ -19,8 +20,8 @@ export default function login() {
 
         "header": {
             "content": ["אנו מזמינים אותך ליצור",
-            "#העצמה_אחת_ביום",
-            "בהשראת סיפורי הגיבורים והגיבורות שלנו"],
+                "#העצמה_אחת_ביום",
+                "בהשראת סיפורי הגיבורים והגיבורות שלנו"],
             "color": "black",
         },
     }
@@ -37,9 +38,10 @@ export default function login() {
                 backgroundColor: 'white',
             }}
         >
-        <Box sx={{ fontSize: 20 }}>{data.header.content.join('\n')}</Box>
-        <img src="/logo1.png" alt="logo" />
-            
+            <Box sx={{ fontSize: 20 }}>{data.header.content.join('\n')}</Box>
+            <img src="/logo1.png" alt="logo" />
+            <TextField id="outlined-basic, fullWidth" color="black" label="Outlined" variant="outlined" />
+
 
         </Box>
 
