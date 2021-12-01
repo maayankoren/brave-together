@@ -97,10 +97,8 @@ export default function Login() {
                 />
             </FormControl>
             <FormGroup style={{ display: "flex", flexDirection: "row-reverse", justifyContent: "space-between" }}>
-                {/* <FormControlLabel control={<Checkbox />}  label="זכור אותי"/> */}
-                <Checkbox style={{ marginTop: "0" }}/>
-                זכור אותי
-                <NavLink to={"/"}>שכחת סיסמה?</NavLink>
+                <FormControlLabel control={<Checkbox style={{ marginTop: "-1" }} />} label="זכור אותי" />
+                <NavLink to={"/"} style={{ textAlign: "right" }}>שכחת סיסמה?</NavLink>
             </FormGroup>
             
 
