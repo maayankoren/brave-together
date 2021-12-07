@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import { spacing } from '@mui/system';
 import TextField from '@mui/material/TextField';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -17,15 +12,28 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { NavLink } from 'react-router-dom';
-
-// const Item = styled(Paper)(({ theme }) => ({
-//   ...theme.typography.body2,
-//   padding: theme.spacing(2),
-//   textAlign: 'center',
-//   color: theme.palette.text.secondary,
-// }));
+import Button from '@mui/material/Button';
+import { createTheme } from '@mui/material/styles';
+import { FacebookIcon,  } from 'react-share';
 
 export default function Login() {
+
+    const theme = createTheme({
+        palette: {
+            primary: {
+                light: '#757ce8',
+                main: '#3f50b5',
+                dark: '#002884',
+                contrastText: '#fff',
+            },
+            secondary: {
+                light: '#ff7961',
+                main: '#f44336',
+                dark: '#ba000d',
+                contrastText: '#000',
+            },
+        },
+    });
 
     const [values, setValues] = useState({
         email: '',
@@ -69,9 +77,10 @@ export default function Login() {
                 fontWeight: 'medium',
                 backgroundColor: 'white',
             }}
+            dir="rtl"
         >
             <Box sx={{ fontSize: 20 }}>{data.header.content.join('\n')}</Box>
-            <img src="/logo1.png" alt="logo" />
+            <img src="/logo1.png" alt="logo" width="220px" height="90px" />
             <TextField fullWidth id="email" label="אימייל" variant="outlined" margin="normal" />
 
             <FormControl fullWidth variant="outlined" margin="normal">
@@ -81,13 +90,13 @@ export default function Login() {
                     type={values.showPassword ? 'text' : 'password'}
                     value={values.password}
                     onChange={handleChange('password')}
-                    startAdornment={
-                        <InputAdornment position="start">
+                    endAdornment={
+                        <InputAdornment position="end">
                             <IconButton
                                 aria-label="toggle password visibility"
                                 onClick={handleClickShowPassword}
                                 onMouseDown={handleMouseDownPassword}
-                                edge="start"
+                                edge="end"
                             >
                                 {values.showPassword ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
@@ -96,11 +105,24 @@ export default function Login() {
                     label="סיסמה"
                 />
             </FormControl>
-            <FormGroup style={{ display: "flex", flexDirection: "row-reverse", justifyContent: "space-between" }}>
+            <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", fontSize: "13px" }}>
                 <FormControlLabel control={<Checkbox style={{ marginTop: "-1" }} />} label="זכור אותי" />
-                <NavLink to={"/"} style={{ textAlign: "right" }}>שכחת סיסמה?</NavLink>
+                <NavLink to={"/"} style={{ margin: "9px", color: "red", textDecoration: "none" }}>שכחת סיסמה?</NavLink>
             </FormGroup>
-            
+            <Button variant="contained" color="warning"
+                style={{ marginTop: "10px", width: "100%", height: "50px", fontSize: "20px" }}>התחבר</Button>
+
+            <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", fontSize: "13px" }}>
+                <hr size="5" color="#000000" width="90px" noshade style={{ marginTop: "29px" }} />
+                <br />או באמצעות
+                <hr size="5" color="#000000" width="90px" noshade style={{ marginTop: "29px" }} />
+            </FormGroup>
+
+            <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", fontSize: "13px" }}>
+            <FacebookIcon size={40}></FacebookIcon>
+            <img src="/google icon.png" alt="google" />
+
+            </FormGroup>
 
         </Box>
 
