@@ -13,21 +13,17 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
     palette: {
         primary: {
-            light: '#757ce8',
-            main: '#3f50b5',
-            dark: '#002884',
-            contrastText: '#fff',
+            main: '#616161',
+            darker: '#373737',
         },
         secondary: {
-            light: '#ff7961',
             main: '#f44336',
             dark: '#ba000d',
-            contrastText: '#000',
         },
     },
 });
@@ -66,8 +62,7 @@ export default function Login() {
     }
 
     return (
-        <MuiThemeProvider theme={theme}>
-
+        <ThemeProvider theme={theme}>
             <Box
                 sx={{
                     mx: 'auto',
@@ -123,16 +118,14 @@ export default function Login() {
                     <img src="/facebook icon.png" alt="facebook" style={{ width: "75px" }} />
                 </FormGroup>
 
-                <Button variant="contained" color="error"
+                <Button variant="contained" color="primary"
                     style={{ marginTop: "10px", width: "100%", height: "50px", fontSize: "20px" }}>הירשם</Button>
                 <div style={{ margin: "10px" }}>
                     <NavLink to={"/"} style={{ size: "50px", color: "black", textDecoration: "none" }}>דלג לבינתיים</NavLink>
                 </div>
 
             </Box>
-
-
-        </MuiThemeProvider>
+        </ThemeProvider>
     );
 
 }
