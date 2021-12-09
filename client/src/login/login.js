@@ -109,7 +109,7 @@ export default function Login() {
                 <FormControlLabel control={<Checkbox style={{ marginTop: "-1" }} />} label="זכור אותי" />
                 <NavLink to={"/"} style={{ margin: "9px", color: "#c53d13", textDecoration: "none" }}>שכחת סיסמה?</NavLink>
             </FormGroup>
-            <Button variant="contained" color="primary"
+            <Button variant="contained" color={theme.pallate.secondary}
                 style={{ marginTop: "10px", width: "100%", height: "50px", fontSize: "20px" }}>התחבר</Button>
 
             <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", fontSize: "13px" }}>
