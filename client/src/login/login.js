@@ -13,28 +13,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import { createTheme } from '@mui/material/styles';
 import { FacebookIcon,  } from 'react-share';
+import { useTheme } from '@mui/core/styles';
 
 export default function Login() {
 
-    const theme = createTheme({
-        palette: {
-            primary: {
-                light: '#757ce8',
-                main: '#3f50b5',
-                dark: '#002884',
-                contrastText: '#fff',
-            },
-            secondary: {
-                light: '#ff7961',
-                main: '#f44336',
-                dark: '#ba000d',
-                contrastText: '#000',
-            },
-        },
-    });
-
+    const theme = useTheme();
+    
     const [values, setValues] = useState({
         email: '',
         password: '',
@@ -107,9 +92,9 @@ export default function Login() {
             </FormControl>
             <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", fontSize: "13px" }}>
                 <FormControlLabel control={<Checkbox style={{ marginTop: "-1" }} />} label="זכור אותי" />
-                <NavLink to={"/"} style={{ margin: "9px", color: "red", textDecoration: "none" }}>שכחת סיסמה?</NavLink>
+                <NavLink to={"/"} style={{ margin: "9px", color: "#c53d13", textDecoration: "none" }}>שכחת סיסמה?</NavLink>
             </FormGroup>
-            <Button variant="contained" color="warning"
+            <Button variant="contained" color={theme.pallate.secondary.dark}
                 style={{ marginTop: "10px", width: "100%", height: "50px", fontSize: "20px" }}>התחבר</Button>
 
             <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", fontSize: "13px" }}>
