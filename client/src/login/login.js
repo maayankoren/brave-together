@@ -13,13 +13,28 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import { FacebookIcon,  } from 'react-share';
-import { useTheme } from '@mui/core/styles';
+import { createTheme } from '@mui/material/styles';
+import { FacebookIcon, } from 'react-share';
 
 export default function Login() {
 
-    const theme = useTheme();
-    
+    const theme = createTheme({
+        palette: {
+            primary: {
+                light: '#757ce8',
+                main: '#3f50b5',
+                dark: '#002884',
+                contrastText: '#fff',
+            },
+            secondary: {
+                light: '#ff7961',
+                main: '#f44336',
+                dark: '#ba000d',
+                contrastText: '#000',
+            },
+        },
+    });
+
     const [values, setValues] = useState({
         email: '',
         password: '',
@@ -94,7 +109,7 @@ export default function Login() {
                 <FormControlLabel control={<Checkbox style={{ marginTop: "-1" }} />} label="זכור אותי" />
                 <NavLink to={"/"} style={{ margin: "9px", color: "#c53d13", textDecoration: "none" }}>שכחת סיסמה?</NavLink>
             </FormGroup>
-            <Button variant="contained" color={theme.pallate.secondary.dark}
+            <Button variant="contained" color="primary"
                 style={{ marginTop: "10px", width: "100%", height: "50px", fontSize: "20px" }}>התחבר</Button>
 
             <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", fontSize: "13px" }}>
@@ -104,10 +119,15 @@ export default function Login() {
             </FormGroup>
 
             <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", fontSize: "13px" }}>
-            <FacebookIcon size={40}></FacebookIcon>
-            <img src="/google icon.png" alt="google" />
-
+                <img src="/google icon.png" alt="google" style={{ width: "75px" }} />
+                <img src="/facebook icon.png" alt="facebook" style={{ width: "75px" }} />
             </FormGroup>
+
+            <Button variant="contained" color="secondary"
+                style={{ marginTop: "10px", width: "100%", height: "50px", fontSize: "20px" }}>הירשם</Button>
+<div style={{margin: "10px"}}>
+<NavLink to={"/"} style={{ color: "black", textDecoration: "none", margin: "10px" }}>דלג לבינתיים</NavLink>
+</div>
 
         </Box>
 
