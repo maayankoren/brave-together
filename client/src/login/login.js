@@ -14,15 +14,16 @@ import Checkbox from '@mui/material/Checkbox';
 import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import "./login.css";
 
 const theme = createTheme({
     palette: {
         primary: {
             main: '#616161',
-            darker: '#373737',
+            dark: '#373737',
         },
         secondary: {
-            main: '#f44336',
+            main: '#ff6900',
             dark: '#ba000d',
         },
     },
@@ -73,6 +74,7 @@ export default function Login() {
                     backgroundColor: 'white',
                 }}
                 dir="rtl"
+                className="login"
             >
                 <Box sx={{ fontSize: 20 }}>{data.header.content.join('\n')}</Box>
                 <img src="/logo1.png" alt="logo" width="220px" height="90px" />
@@ -100,30 +102,27 @@ export default function Login() {
                         label="סיסמה"
                     />
                 </FormControl>
-                <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", fontSize: "13px" }}>
+                <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                     <FormControlLabel control={<Checkbox style={{ marginTop: "-1" }} />} label="זכור אותי" />
                     <NavLink to={"/"} style={{ margin: "9px", color: "#c53d13", textDecoration: "none" }}>שכחת סיסמה?</NavLink>
                 </FormGroup>
-                <Button variant="contained" color="secondary"
-                    style={{ marginTop: "10px", width: "100%", height: "50px", fontSize: "20px" }}>התחבר</Button>
-
-                <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", fontSize: "13px" }}>
+                <Button variant="contained" color="secondary" className="button">התחבר</Button>
+                <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
                     <hr size="5" color="#000000" width="90px" noshade style={{ marginTop: "29px" }} />
                     <br />או באמצעות
                     <hr size="5" color="#000000" width="90px" noshade style={{ marginTop: "29px" }} />
                 </FormGroup>
-
                 <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", fontSize: "13px" }}>
-                    <img src="/google icon.png" alt="google" style={{ width: "75px" }} />
-                    <img src="/facebook icon.png" alt="facebook" style={{ width: "75px" }} />
+                    <img src="/google icon.png" alt="google" style={{ width: "75px" }} onClick="/" />
+                    <img src="/facebook icon.png" alt="facebook" style={{ width: "75px" }}  onClick="/" />
                 </FormGroup>
+                <Button variant="contained" color="primary" className="button">הירשם</Button>
+                {/* <div style={{ margin: "10px" }}> */}
+                <Box sx={{ height: 50, padding: 1.5 }}>
+                    <NavLink to={"/"} style={{ fontSize: "17px", color: "black", textDecoration: "none" }}>דלג לבינתיים</NavLink>
+                {/* </div> */}
 
-                <Button variant="contained" color="primary"
-                    style={{ marginTop: "10px", width: "100%", height: "50px", fontSize: "20px" }}>הירשם</Button>
-                <div style={{ margin: "10px" }}>
-                    <NavLink to={"/"} style={{ size: "50px", color: "black", textDecoration: "none" }}>דלג לבינתיים</NavLink>
-                </div>
-
+                </Box>
             </Box>
         </ThemeProvider>
     );
