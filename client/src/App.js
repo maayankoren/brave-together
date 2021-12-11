@@ -22,6 +22,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
 import ProtectedRoute from './protectedRoute/ProtectedRoute';
+import Quotes from './quotes/Quotes';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route exact path='/About' component={About} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={SignUp} />
+        <Route exact path='/quotes' component={Quotes} />
         <Route path='*' component={() => '404 Not Found'} />
       </Switch>
       <Footer></Footer>
