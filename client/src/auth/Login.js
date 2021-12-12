@@ -19,6 +19,8 @@ import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./Login.css";
+import validator from 'validator'
+
 
 const theme = createTheme({
     palette: {
@@ -39,6 +41,7 @@ export default function Login() {
         email: '',
         password: '',
         showPassword: false,
+        emailError: ''
     });
 
     let history = useHistory();
@@ -56,6 +59,14 @@ export default function Login() {
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
+        if (prop == "email") {
+            var email = event.target.value
+            if (validator.isEmail(email)) {
+                setValues({ ...values, emailError: '' })
+            } else {
+                setValues({ ...values, emailError: 'כתובת האימייל חייבת להיות חוקית.' })
+            }
+        }
     };
 
     const handleSubmit = () => {
@@ -113,10 +124,19 @@ export default function Login() {
                     <LogoImg src="https://brave-together.com/wp-content/uploads/2021/05/%D7%9C%D7%95%D7%92%D7%95-%D7%A8%D7%99%D7%91%D7%95%D7%A2%D7%99-%D7%A9%D7%A7%D7%95%D7%A3-300x300.png" width="128" height="128"></LogoImg>
                     <Header>התחברות</Header>
                     <form onSubmit={handleSubmit()}>
-                        <Label for="emailBox">כתובת אימייל </Label>
-                        <Input id="emailBox" type="email" name="email" value={values.email} onChange={handleChange()} title="כתובת האימייל חייבת להיות חוקית." required style={{ marginRight: "auto", marginLeft: "auto" }}></Input>
-                        <Label for="passwordBox">סיסמא </Label>
-                        <Input id="passwordBox" type="password" name="password" value={values.password} required onChange={handleChange()}></Input>
+                        <Label htmlFor="emailBox">כתובת אימייל </Label>
+                        <Input id="emailBox" type="email" name="email" value={values.email} onChange={handleChange('email')} required style={{ marginRight: "auto", marginLeft: "auto" }}></Input>
+                        <span style={{
+                            fontWeight: 'bold',
+                            color: 'red',
+                        }}>{values.emailError}</span>
+                        <Label htmlFor="passwordBox">סיסמא </Label>
+                        <Input id="passwordBox"
+                            type="password"
+                            name="password"
+                            value={values.password}
+                            required
+                            onChange={handleChange('password')}></Input>
                         <br></br>
                         <Submit type="submit" value="הרשמה"></Submit>
                     </form>
@@ -142,8 +162,11 @@ export default function Login() {
                     >
                         <Box sx={{ fontSize: 20 }}>{data.header.content.join('\n')}</Box>
                         <img src="/logo1.png" alt="logo" width="220px" height="90px" />
-                        <TextField fullWidth id="email" label="אימייל" variant="outlined" margin="normal" />
-
+                        <TextField fullWidth id="email" label="אימייל" variant="outlined" margin="normal" onChange={handleChange('email')} />
+                        <span style={{
+                            fontWeight: 'bold',
+                            color: 'red',
+                        }}>{values.emailError}</span>
                         <FormControl fullWidth variant="outlined" margin="normal">
                             <InputLabel htmlFor="outlined-adornment-password">סיסמה</InputLabel>
                             <OutlinedInput
