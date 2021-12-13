@@ -98,32 +98,36 @@
       transform: translate(-50%, -50%);
     }
     .choose-text {
+      width: 90%;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-inline-end: -48px;
-      margin-bottom: 5px;
+      position: relative;
+      bottom: 9px;
       p {
         margin: 0;
         font-weight: 500;
         font-size: 1rem;
         margin-inline-end: 10px;
+        line-height: 40px;
       }
       .add-btn {
         text-align: center;
-        line-height: 41px;
+        position: absolute;
         height: 48px;
         width: 48px;
-        border-radius: 50%;
-        background-color: #272f33;
-        color: #ffffff;
-        font-size: 40px;
+        right: 0;
+        overflow: hidden;
+        img {
+          position: absolute;
+          top: -62px;
+        }
       }
       &.chosen {
-        width: 90%;
         border-radius: 2px;
         background-color: #cd531f;
         margin-inline-end: 0;
+        color: #ffffff;
       }
     }
   }
