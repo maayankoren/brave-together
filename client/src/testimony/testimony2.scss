@@ -37,6 +37,11 @@
 
     .hero-details {
       padding: 30px 8px;
+      .sm-img {
+        height: 20px;
+        width: fit-content;
+        margin: 0;
+      }
       .hero-name {
         font-size: 1.25rem;
         font-weight: bold;
@@ -45,9 +50,17 @@
       .hero-author {
         font-size: 0.875rem;
         margin-bottom: 8px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 5px;
       }
       .date {
         font-size: 0.75rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 5px;
       }
     }
 

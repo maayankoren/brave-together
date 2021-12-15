@@ -6,6 +6,8 @@ import vectorTop1 from '../assets/images/vectortop1.png'
 import vectorTop2 from '../assets/images/vectortop2.png'
 import vectorBottom from '../assets/images/vectorbottom.png'
 import addBtn from '../assets/images/add-btn.png'
+import pen from '../assets/images/pen.png'
+import calendar from '../assets/images/calendar.png'
 import { mock } from './mock2';
 
 
@@ -17,7 +19,8 @@ const Testimony = ({ match }) => {
 
     const [story, setStory] = useState(null)
     const [isChooseText, setIsChooseText] = useState(false)
-    const selectedText = useRef()
+    const selectedText = useRef(null)
+
     useEffect(() => {
         // const { storyId } = match.params; // get from params
         const storyId = '61994cce5c6bda891a141382';
@@ -25,22 +28,19 @@ const Testimony = ({ match }) => {
         setStory(story)
     }, [match.params.storyId])
 
-    const chooseText = (ev) => {
-        if (!isChooseText) return
-        if (ev.type === 'touchstart') {
-            console.log('please select text');
-            console.log(window.getSelection())
-        }
-        selectedText.current = window.getSelection().toString()
-    }
-
     const onChooseText = (ev) => {
         if (isChooseText) {
-            console.log(selectedText.current)
+            console.log('after selection', selectedText.current)
             //go to edit quote 
         }
         setIsChooseText(!isChooseText);
     }
+
+    const chooseText = () => {
+        if (!isChooseText) return
+        selectedText.current = window.getSelection().toString()
+    }
+
 
     if (!story) return <div></div>
     return (
@@ -53,15 +53,15 @@ const Testimony = ({ match }) => {
                     </div>
                     <div className="hero-details">
                         <h2 className="hero-name">{story.heroName}</h2>
-                        <p className="hero-author">מחבר.ת הסיפור</p>
-                        <p className="date">{story.date}</p>
+                        <p className="hero-author"> מחבר.ת הסיפור <img className="sm-img" src={pen} /></p>
+                        <p className="date">{story.date} <img className="sm-img" src={calendar} /></p>
                     </div>
                     <div className="vector top1-vector"><img src={vectorTop1} /></div>
                     <div className="vector top2-vector"><img src={vectorTop2} /></div>
                     <div className="vector bottom-vector"><img src={vectorBottom} /></div>
                 </div>
                 <div>{selectedText.current}</div>
-                <div className="testimony-details" onMouseUp={chooseText} onTouchStart={chooseText}>
+                <div className="testimony-details" onClick={chooseText} onTouchEnd={chooseText}>
                     {story.text}
                 </div>
             </div>
