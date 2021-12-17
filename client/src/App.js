@@ -5,7 +5,7 @@ import { Switch, Route, BrowserRouter, withRouter } from 'react-router-dom';
 //import { NativeRouter, BackButton } from 'react-router-native';
 import Template from './template/template';
 import StoryCheck from './storyCheck/storyCheck';
-import Testimony from './testimony/testimony2';
+import Testimony from './testimony/testimony';
 import TextEdit from './text/text';
 import StoryUpload from './storyUpload/StoryUpload';
 import TemplateEdit from './templateEdit/template-edit';
