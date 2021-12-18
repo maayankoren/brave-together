@@ -46,19 +46,20 @@ function Homepage() {
 
     let data = {
         "headerTitle": {
-            "content": [],
+            "content": [
+                "ברוכים הבאים למקום בו אפשר ליצור",
+                "#העצמה_אחת_ביום"
+            ],
             "color": "white",
             "fontSize": "14vh"
         },
         "openingText": {
             "content": [
-                "ברוכים הבאים למקום בו אפשר ליצור",
-                "*#העצמה_אחת_ביום*",
                 "בהשראת סיפורים של גיבורים וגיבורות מהשואה.",
                 "המוטו שלנו הוא \"לעשות\" ולא לשכוח.",
                 "באתר אתם מוזמנים:",
-                "לקרוא",
-                "סיפורי גבורה, העצמה אישית וסיפורים מעוררי השראה.",
+                " לקרוא ",
+                "סיפורי גבורה, העצמה אישית<b> וסיפורים </b>מעוררי השראה.",
                 "לבחור",
                 "ציטוט אותו תרצו לשתף. בין אם זה ביום הזכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה."
             ],
@@ -101,14 +102,15 @@ function Homepage() {
             <div className="pcComponent">
                 <Body>
                     <h1 className='header'>
-                        {data.headerTitle.content.join()}
+                        {data.headerTitle.content[0]}<br />
+                        <b>{data.headerTitle.content[1]}</b>
                     </h1>
                     <div className='opening-text'>
                         {data.openingText.content[0]} <br />
-                        <b>{data.openingText.content[1]}</b><br />
-                        {data.openingText.content[2]} <br />
-                        {data.openingText.content[3]} <br />
-                        {data.openingText.content[4]} <br />
+                        {data.openingText.content[1]}<br />
+                        {data.openingText.content[2]}<br />
+                        <img src="/list-triangle.png" alt="triangle" className='triangle' /><b>{data.openingText.content[3]}</b>{data.openingText.content[4]}<br />
+
                     </div>
                     <br /><br />
                     <div className='developmentInfo'>
