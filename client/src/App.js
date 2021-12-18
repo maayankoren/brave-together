@@ -20,6 +20,7 @@ import Header from './header/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
+import StoryCheckNew from './storyCheckNew/StoryCheckNew';
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
       <Header></Header>
       <Switch>
         <Route exact path='/' component={Homepage} />
-        <Route exact path='/storyCheck' component={StoryCheck} />
+        <Route exact path='/storyCheck' component={StoryCheckNew} />
         <Route exact path='/testimony' component={Testimony} />
         <Route exact path='/textEdit' component={TextEdit} />
         <Route exact path='/storyUpload' component={StoryUpload} />
@@ -39,7 +40,7 @@ function App() {
         <Route exact path='/signup' component={SignUp} />
         <Route path='*' component={() => '404 Not Found'} />
       </Switch>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </BrowserRouter>
   );
 }
