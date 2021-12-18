@@ -14,40 +14,30 @@
   font-weight: bold;
 }
 
-body {
-  /* background: url("../../../public/images/back.jpg") no-repeat center center fixed; */
-  background: url("back.jpg") no-repeat center center fixed;
-
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-input {
+.story-container input {
   width: inherit;
   border: 2px solid #0292E6;
   border-radius: 5px;
   /* border: 2px rgb(206, 206, 252) double; */
 }
 
-textarea {
+.story-container textarea {
   border: 2px solid #0292E6;
   border-radius: 5px;
   width: inherit;
   text-align: right;
 }
 
-label {
+.story-container label {
   font-size: 14px;
   margin-bottom: 5px;
 }
 
-.content {
+.story-container .content {
   left: 30%;
 }
 
-form {
+.story-container form {
   /* display: inline-block; */
   /* position: relative; */
   /* background-color: rgb(231, 249, 255); */
@@ -59,12 +49,12 @@ form {
   /* padding: 10px 10px; */
 }
 
-p {
+.story-container p {
   font-size: small;
   text-align: right;
 }
 
-button{
+.story-container button{
     border-color: black;
     border-width: 1px;
     background: #1542C9;
@@ -80,7 +70,7 @@ button{
 
 }
 
-#button{
+.story-container #button{
   /* position: absolute;
   /* bottom: 55px; */
   /* position: fixed; */
@@ -93,7 +83,7 @@ button{
   /* line-height: 45px;  */
 } 
 
-button:hover{
+.story-container button:hover{
   background-color: #0292E6;
 }
 
@@ -106,7 +96,7 @@ button:hover{
     margin-top: 0%;
   }
 
-  textarea {
+  .story-container  textarea {
     height: 20em;
   }
 }
