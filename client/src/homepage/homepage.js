@@ -109,7 +109,8 @@ function Homepage() {
                         {data.openingText.content[0]} <br />
                         {data.openingText.content[1]}<br />
                         {data.openingText.content[2]}<br />
-                        <img src="/list-triangle.png" alt="triangle" className='triangle' /><b>{data.openingText.content[3]}</b>{data.openingText.content[4]}<br />
+                        <img src="/list-triangle.png" alt="triangle" className='triangle' />
+                        <b>{data.openingText.content[3]}</b>{data.openingText.content[4]}<br />
 
                     </div>
                     <br /><br />
