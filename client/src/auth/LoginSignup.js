@@ -35,7 +35,7 @@ const theme = createTheme({
     },
 });
 
-export default function Login() {
+export default function LoginSignup({ isSignup }) {
 
     const [values, setValues] = useState({
         email: '',
@@ -62,23 +62,14 @@ export default function Login() {
         if (prop == "email") {
             var email = event.target.value
             if (validator.isEmail(email)) {
-                setValues({ ...values, emailError: '' })
+                setValues({ ...values, email, emailError: '' })
             } else {
                 setValues({ ...values, emailError: 'כתובת האימייל חייבת להיות חוקית.' })
             }
         }
     };
 
-    const handleSubmit = () => {
 
-    }
-
-    //////////////Old functions:
-    // handleChange(event) {
-    //     const input = event.target;
-    //     const value = input.value;
-    //     this.setState({ [input.name]: value });
-    // }
 
     // async handleSubmit(event) {
     //     event.preventDefault();
@@ -105,6 +96,40 @@ export default function Login() {
     //         });
     // }
 
+    const handleMoveBtn = () => {
+        const page = isSignup ? '/login' : '/signup'
+        history.push(page)
+    }
+
+    const onLoginSignup = async () => {
+        const axiosConfig = {
+            headers: {
+                'Content-Type': 'application/json  ',
+                "Access-Control-Allow-Origin": "*",
+            }
+        };
+
+        if (isSignup) {
+
+        } else {
+            const { email, password } = values
+            try {
+                const res = await axios.get("http://localhost:5000/token", {
+                    auth: {
+                        username: email,
+                        password: password
+                    }
+                }, axiosConfig)
+                localStorage.setItem('token', res.data.token);
+                alert("logged in successfully!");
+                history.push("/");
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    }
+
+
     let data = {
         "header": {
             "content": ["אנו מזמינים אותך ליצור",
@@ -123,7 +148,7 @@ export default function Login() {
                 <DivForm>
                     <LogoImg src="https://brave-together.com/wp-content/uploads/2021/05/%D7%9C%D7%95%D7%92%D7%95-%D7%A8%D7%99%D7%91%D7%95%D7%A2%D7%99-%D7%A9%D7%A7%D7%95%D7%A3-300x300.png" width="128" height="128"></LogoImg>
                     <Header>התחברות</Header>
-                    <form onSubmit={handleSubmit()}>
+                    <form>
                         <Label htmlFor="emailBox">כתובת אימייל </Label>
                         <Input id="emailBox" type="email" name="email" value={values.email} onChange={handleChange('email')} required style={{ marginRight: "auto", marginLeft: "auto" }}></Input>
                         <span style={{
@@ -193,7 +218,7 @@ export default function Login() {
                             <FormControlLabel control={<Checkbox style={{ marginTop: "-1" }} />} label="זכור אותי" />
                             <NavLink to={"/"} style={{ margin: "9px", color: "#c53d13", textDecoration: "none" }}>שכחת סיסמה?</NavLink>
                         </FormGroup>
-                        <Button variant="contained" color="secondary" className="button">התחבר</Button>
+                        <Button variant="contained" color="secondary" onClick={onLoginSignup} className="button">{isSignup ? 'הירשם' : 'התחבר'}</Button>
                         <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
                             <hr size="5" color="#000000" width="90px" noshade style={{ marginTop: "29px" }} />
                             <br />או באמצעות
@@ -203,7 +228,7 @@ export default function Login() {
                             <img src="/google icon.png" alt="google" style={{ width: "75px" }} onClick="/" />
                             <img src="/facebook icon.png" alt="facebook" style={{ width: "75px" }} onClick="/" />
                         </FormGroup>
-                        <Button variant="contained" color="primary" className="button">הירשם</Button>
+                        <Button variant="contained" color="primary" onClick={handleMoveBtn} className="button">{isSignup ? 'התחבר' : 'הירשם'}</Button>
                         {/* <div style={{ margin: "10px" }}> */}
                         <Box sx={{ height: 50, padding: 1.5 }}>
                             <NavLink to={"/"} style={{ fontSize: "17px", color: "black", textDecoration: "none" }}>דלג לבינתיים</NavLink>
