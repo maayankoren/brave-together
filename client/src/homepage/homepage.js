@@ -1,6 +1,20 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import './homepage.scss';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#616161',
+            dark: '#373737',
+        },
+        secondary: {
+            main: '#ff6900',
+            dark: '#ba000d',
+        },
+    },
+});
 
 
 function Homepage() {
@@ -70,20 +84,28 @@ function Homepage() {
 
     return (
         <div className='homepage-container'>
-            <h1 className='header'>
-                {data.headerTitle.content}
-            </h1>
-            <div className='opening-text'>
-                {data.openingText.content.join('\n')}
+            <div className="pcComponent">
+                <h1 className='header'>
+                    {data.headerTitle.content}
+                </h1>
+                <div className='opening-text'>
+                    {data.openingText.content.join('\n')}
+                </div>
+                <div className='developmentInfo'>
+                    {data.developmentInfo.content}
+                    {data.developmentInfo.versions[0].number}: <br />
+                    {data.developmentInfo.versions[0].members}
+                    {data.developmentInfo.versions[1].number}: <br />
+                    {data.developmentInfo.versions[1].members}
+                </div>
+                <button onClick={onStartButtonClick}>בואו נתחיל</button>
             </div>
-            <div className='developmentInfo'>
-                {data.developmentInfo.content}
-                {data.developmentInfo.versions[0].number}: <br />
-                {data.developmentInfo.versions[0].members}
-                {data.developmentInfo.versions[1].number}: <br />
-                {data.developmentInfo.versions[1].members}
+            <div className="phoneComponent">
+                <ThemeProvider theme={theme}>
+                    <img src="/logo1.png" alt="logo" width="220px" height="90px" />
+
+                </ThemeProvider>
             </div>
-            <button onClick={onStartButtonClick}>בואו נתחיל</button>
         </div>
     );
 }
