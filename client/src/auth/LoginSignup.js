@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Submit, Input, DivForm, Input2, Label2, Header, Label, LogoImg, Body } from './Design/styledComponents';
 import { useHistory, BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import logo from '../assets/images/Logo.jpg';
@@ -36,15 +36,23 @@ const theme = createTheme({
 });
 
 export default function LoginSignup({ isSignup }) {
+    let history = useHistory();
 
     const [values, setValues] = useState({
         email: '',
         password: '',
         showPassword: false,
-        emailError: ''
+        emailError: '',
+        firstName: '',
+        lastName: '',
+        phone: ''
     });
 
-    let history = useHistory();
+    useEffect(() => {
+        // const token = localStorage.getItem('token');
+        // if(token) history.push("/");
+        setValues({ ...values, emailError: '' })
+    }, [isSignup])
 
     const handleClickShowPassword = () => {
         setValues({
@@ -69,63 +77,60 @@ export default function LoginSignup({ isSignup }) {
         }
     };
 
-
-
-    // async handleSubmit(event) {
-    //     event.preventDefault();
-    //     console.log("state : ", this.state.email);
-
-    //     let axiosConfig = {
-    //         headers: {
-    //             'Content-Type': 'application/json  ',
-    //             "Access-Control-Allow-Origin": "*",
-    //         }
-    //     };
-
-    //     await axios.get("http://localhost:5000/token", {
-    //         auth: {
-    //             username: this.state.email,
-    //             password: this.state.password
-    //         }
-    //     }) // calling api request to create a new user
-    //         .then(response => {
-    //             localStorage.setItem('token', response.data.token);
-
-    //             alert("logged in successfully!");
-    //             this.props.history.push("/");
-    //         });
-    // }
-
     const handleMoveBtn = () => {
         const page = isSignup ? '/login' : '/signup'
         history.push(page)
     }
 
     const onLoginSignup = async () => {
-        const axiosConfig = {
-            headers: {
-                'Content-Type': 'application/json  ',
-                "Access-Control-Allow-Origin": "*",
-            }
-        };
-
         if (isSignup) {
+            const { email, password, firstName, lastName, phone } = values
+            const creds = {
+                email,
+                password,
+                first_name: firstName,
+                last_name: lastName,
+                cellphone: phone
+            }
+            var config = {
+                method: 'post',
+                url: 'http://localhost:5000/user',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: creds
+            };
+
+            try {
+                await axios(config)
+                doLogin(email, password)
+            } catch (err) {
+                let message = typeof err.response !== "undefined" ? err.response.data.message : err.message;
+                setValues({ ...values, emailError: message })
+            }
 
         } else {
             const { email, password } = values
-            try {
-                const res = await axios.get("http://localhost:5000/token", {
-                    auth: {
-                        username: email,
-                        password: password
-                    }
-                }, axiosConfig)
-                localStorage.setItem('token', res.data.token);
-                alert("logged in successfully!");
-                history.push("/");
-            } catch (err) {
-                console.log(err)
-            }
+            doLogin(email, password)
+        }
+    }
+
+
+
+    const doLogin = async (email, password) => {
+        try {
+            const { data } = await axios.get("http://localhost:5000/token", {
+                auth: {
+                    username: email,
+                    password: password
+                },
+            })
+            localStorage.setItem('token', data.token);
+            alert("logged in successfully!");
+            history.push("/");
+        } catch (err) {
+            let message = typeof err.response !== "undefined" ? err.response.data.message : err.message;
+            setValues({ ...values, emailError: message })
         }
     }
 
@@ -185,48 +190,61 @@ export default function LoginSignup({ isSignup }) {
                         }}
                         dir="rtl"
                     >
-                        <Box sx={{ fontSize: 20 }}>{data.header.content.join('\n')}</Box>
-                        <img src="/logo1.png" alt="logo" width="220px" height="90px" />
-                        <TextField fullWidth id="email" label="אימייל" variant="outlined" margin="normal" onChange={handleChange('email')} />
-                        <span style={{
-                            fontWeight: 'bold',
-                            color: 'red',
-                        }}>{values.emailError}</span>
-                        <FormControl fullWidth variant="outlined" margin="normal">
-                            <InputLabel htmlFor="outlined-adornment-password">סיסמה</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-password"
-                                type={values.showPassword ? 'text' : 'password'}
-                                value={values.password}
-                                onChange={handleChange('password')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                        >
-                                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="סיסמה"
-                            />
-                        </FormControl>
-                        <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                            <FormControlLabel control={<Checkbox style={{ marginTop: "-1" }} />} label="זכור אותי" />
-                            <NavLink to={"/"} style={{ margin: "9px", color: "#c53d13", textDecoration: "none" }}>שכחת סיסמה?</NavLink>
-                        </FormGroup>
-                        <Button variant="contained" color="secondary" onClick={onLoginSignup} className="button">{isSignup ? 'הירשם' : 'התחבר'}</Button>
+
+                        <form>
+                            <Box sx={{ fontSize: 20 }}>{data.header.content.join('\n')}</Box>
+                            <img src="/logo1.png" alt="logo" width="220px" height="90px" />
+                            <TextField required fullWidth id="email" label="אימייל" variant="outlined" margin="normal" onChange={handleChange('email')} />
+                            <span style={{
+                                fontWeight: 'bold',
+                                color: 'red',
+                            }}>{values.emailError}</span>
+                            <FormControl fullWidth variant="outlined" margin="normal">
+                                <InputLabel required htmlFor="outlined-adornment-password">סיסמה</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-password"
+                                    type={values.showPassword ? 'text' : 'password'}
+                                    value={values.password}
+                                    onChange={handleChange('password')}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                    label="סיסמה"
+                                />
+                            </FormControl>
+                            {
+                                isSignup && <>
+                                    <TextField required fullWidth id="firstName" label="שם פרטי" variant="outlined" margin="normal" onChange={handleChange('firstName')} />
+                                    <TextField fullWidth id="lastName" label="שם משפחה" variant="outlined" margin="normal" onChange={handleChange('lastName')} />
+                                    <TextField fullWidth id="phone" type="phone" label="פלאפון" variant="outlined" margin="normal" onChange={handleChange('phone')} />
+                                </>
+
+                            }
+
+                            <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                                <FormControlLabel control={<Checkbox style={{ marginTop: "-1" }} />} label="זכור אותי" />
+                                <NavLink to={"/"} style={{ margin: "9px", color: "#c53d13", textDecoration: "none" }}>שכחת סיסמה?</NavLink>
+                            </FormGroup>
+                            <Button variant="contained" color="secondary" onClick={onLoginSignup} className="button">{isSignup ? 'הירשם' : 'התחבר'}</Button>
+                        </form>
+
                         <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
                             <hr size="5" color="#000000" width="90px" noshade style={{ marginTop: "29px" }} />
                             <br />או באמצעות
                             <hr size="5" color="#000000" width="90px" noshade style={{ marginTop: "29px" }} />
                         </FormGroup>
                         <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", fontSize: "13px" }}>
-                            <img src="/google icon.png" alt="google" style={{ width: "75px" }} onClick="/" />
-                            <img src="/facebook icon.png" alt="facebook" style={{ width: "75px" }} onClick="/" />
+                            <img src="/google icon.png" alt="google" style={{ width: "75px" }} />
+                            <img src="/facebook icon.png" alt="facebook" style={{ width: "75px" }} />
                         </FormGroup>
                         <Button variant="contained" color="primary" onClick={handleMoveBtn} className="button">{isSignup ? 'התחבר' : 'הירשם'}</Button>
                         {/* <div style={{ margin: "10px" }}> */}
