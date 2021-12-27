@@ -61,7 +61,7 @@ const Testimony = ({ match }) => {
         setIsModalOpen(!isModalOpen)
     }
 
-    if (!story) return <div></div>
+    if (!story) return <div>Loading..</div>
     return (
         <section className="testimony-container">
 
