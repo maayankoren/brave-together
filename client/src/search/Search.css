@@ -1,0 +1,15 @@
+.Search{
+    min-height: 500px;/*for now*/
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: aliceblue;
+}
+.search-input{
+    background: #C1D4DB;
+    border: 1px solid #3F3F3F;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 2%;
+    height: 6vh;
+}
