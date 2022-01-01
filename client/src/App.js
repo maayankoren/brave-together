@@ -19,8 +19,8 @@ import Homepage from './homepage/homepage';
 import ThankYouForComing from './thankYouForComing/thankYouForComing';
 import Header from './header/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './auth/Login';
-import SignUp from './auth/SignUp';
+import LoginSignup from './auth/LoginSignup';
+// import SignUp from './auth/SignUp';
 import ProtectedRoute from './protectedRoute/ProtectedRoute';
 import Quotes from './quotes/Quotes';
 
@@ -39,8 +39,8 @@ function App() {
         <Route exact path='/share' component={Share} />
         <Route exact path='/thankYouForComing' component={ThankYouForComing} />
         <Route exact path='/About' component={About} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/signup' component={SignUp} />
+        <Route exact path='/login' component={LoginSignup} />
+          <Route exact path='/signup' render={()=><LoginSignup isSignup={true}></LoginSignup>} />
         <Route exact path='/quotes' component={Quotes} />
         <Route path='*' component={() => '404 Not Found'} />
       </Switch>
