@@ -31,7 +31,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={Homepage} />
         <Route exact path='/storyCheck' component={StoryCheck} />
-        <Route exact path='/testimony' component={Testimony} />
+        <Route exact path='/testimony/:storyId' component={Testimony} />
         <Route exact path='/textEdit' component={TextEdit} />
         <ProtectedRoute exact path='/storyUpload' component={StoryUpload} />
         <Route exact path='/unauthorized' component={UnAuthorizedPage}/>
