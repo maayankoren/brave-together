@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import './homepage.scss';
-import Card from '@mui/material/Card';
 
 
 function Homepage() {
@@ -83,38 +82,28 @@ function Homepage() {
 
     return (
         <div className='homepage-container' dir="rtl">
-            <Card sx={{ p: "40px", maxWidth: "150vh" }}>
-                <h1 className='header'>
-                    <img src="/logo1.png" alt="logo" width="220px" height="90px" style={{ "margin-top": "100px", "margin-bottom": "100px" }} />
-                    <br />
-                    ברוכים הבאים למקום בו אפשר ליצור <br />
-                    <b>#העצמה_אחת_ביום</b>
-                </h1><br />
-                <div className='opening-text'>
-                    בהשראת סיפורים של גיבורים וגיבורות מהשואה.<br />
-                    המוטו שלנו הוא "לעשות ולא לשכוח". <br />
-                    באתר אתם מוזמנים:
-                    <ul>
-                        <li><b>לקרוא</b> סיפורי גבורה, העצמה אישית וסיפורים מעוררי השראה. </li>
-                        <li><b>לבחור</b> סיפור אותו תרצו לשתף.
-                            בין אם זה ביום הזיכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה.</li>
-                        <li><b>לעצב</b> אותו באתר ולשתף היכן שתרצו.</li>
-                    </ul>
-                </div><br />
-                <div className='closing-text'>
-                    לעוד מידע על העמותה וכלל הפרויקטים שלנו מוזמנים לאתר מצעד הגבורה
-                    <br /><br />
-                    <button onClick={onStartButtonClick}>בואו נתחיל</button>
-                </div>
+            <h1 className='header' style={{ "margin-bottom": "10px" }}>
+                <img src="/logo1.png" alt="logo" width="220px" height="90px" style={{ "margin-top": "30px", "margin-bottom": "50px" }} />
+                <br />
+                ברוכים הבאים למקום בו אפשר ליצור <br />
+                <b>#העצמה_אחת_ביום</b>
+            </h1>
+            <div className='opening-text'>
+                בהשראת סיפורים של גיבורים וגיבורות מהשואה.<br />
+                המוטו שלנו הוא "לעשות ולא לשכוח". <br />
+                באתר אתם מוזמנים:
+                <ul>
+                    <li><b>לקרוא</b> סיפורי גבורה, העצמה אישית וסיפורים מעוררי השראה. </li>
+                    <li><b>לבחור</b> סיפור אותו תרצו לשתף.
+                        בין אם זה ביום הזיכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה.</li>
+                    <li><b>לעצב</b> אותו באתר ולשתף היכן שתרצו.</li>
+                </ul>
+            </div><br />
+            <div className='closing-text'>
+                לעוד מידע על העמותה וכלל הפרויקטים שלנו מוזמנים לאתר מצעד הגבורה
                 <br /><br />
-                <div className='developmentInfo'>
-                    {data.developmentInfo.content}
-                    {data.developmentInfo.versions[0].number}: <br />
-                    {data.developmentInfo.versions[0].members}
-                    {data.developmentInfo.versions[1].number}: <br />
-                    {data.developmentInfo.versions[1].members}
-                </div>
-            </Card>
+                <button onClick={onStartButtonClick}>בואו נתחיל</button>
+            </div>
         </div >
     );
 }
