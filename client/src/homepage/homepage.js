@@ -3,7 +3,8 @@ import { useHistory } from "react-router-dom";
 import './homepage.scss';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { Body, Div, DivForm, FullInput, Root } from '../auth/Design/styledComponents';
+import { Div, DivForm, FullInput, Root } from '../auth/Design/styledComponents';
+import Card from '@mui/material/Card';
 
 const theme = createTheme({
     palette: {
@@ -54,16 +55,15 @@ function Homepage() {
             "fontSize": "14vh"
         },
         "openingText": {
-            "content": [
-                "בהשראת סיפורים של גיבורים וגיבורות מהשואה.",
-                "המוטו שלנו הוא \"לעשות\" ולא לשכוח.",
-                "באתר אתם מוזמנים:",
-                " לקרוא ",
-                "סיפורי גבורה, העצמה אישית<b> וסיפורים </b>מעוררי השראה.",
-                "לבחור",
-                "ציטוט אותו תרצו לשתף. בין אם זה ביום הזכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה."
-            ],
-            // "content": ["אנו מזמינים אותך ליצור העצמה אישית בהשראת סיפורים של גיבורים וגיבורות מהשואה.",
+            "content":
+                "בהשראת סיפורים של גיבורים וגיבורות מהשואה." +
+                "המוטו שלנו הוא \"לעשות\" ולא לשכוח." +
+                "באתר אתם מוזמנים:" +
+                " לקרוא " +
+                "סיפורי גבורה, העצמה אישית<b> וסיפורים </b>מעוררי השראה." +
+                "לבחור" +
+                "ציטוט אותו תרצו לשתף. בין אם זה ביום הזכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה.",
+            // "oldContent": ["אנו מזמינים אותך ליצור העצמה אישית בהשראת סיפורים של גיבורים וגיבורות מהשואה.",
             //     "המוטו שלנו הוא \"לעשות\" ולא לשכוח. באתר אתם מוזמנים",
             //     "לקרוא סיפורי גבורה, העצמה אישית וסיפורים מעוררי השראה.",
             //     "אנו מזמינים אתכם לקרוא את הסיפורים והעדויות של הגיבורים שלנו ולבחור את הציטוט אותו תרצו לשתף.",
@@ -100,18 +100,28 @@ function Homepage() {
     return (
         <div className='homepage-container' dir="rtl">
             <div className="pcComponent">
-                <Body>
+                <Card sx={{ p: "40px", maxWidth: "150vh" }}>
                     <h1 className='header'>
-                        {data.headerTitle.content[0]}<br />
-                        <b>{data.headerTitle.content[1]}</b>
-                    </h1>
+                        <img src="/logo1.png" alt="logo" width="220px" height="90px" style={{ "margin-top": "100px", "margin-bottom": "100px" }} />
+                        <br />
+                        ברוכים הבאים למקום בו אפשר ליצור <br />
+                        <b>#העצמה_אחת_ביום</b>
+                    </h1><br />
                     <div className='opening-text'>
-                        {data.openingText.content[0]} <br />
-                        {data.openingText.content[1]}<br />
-                        {data.openingText.content[2]}<br />
-                        <img src="/list-triangle.png" alt="triangle" className='triangle' />
-                        <b>{data.openingText.content[3]}</b>{data.openingText.content[4]}<br />
-
+                        בהשראת סיפורים של גיבורים וגיבורות מהשואה.<br />
+                        המוטו שלנו הוא "לעשות ולא לשכוח". <br />
+                        באתר אתם מוזמנים:
+                        <ul>
+                            <li><b>לקרוא</b> סיפורי גבורה, העצמה אישית וסיפורים מעוררי השראה. </li>
+                            <li><b>לבחור</b> סיפור אותו תרצו לשתף.
+                                בין אם זה ביום הזיכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה.</li>
+                            <li><b>לעצב</b> אותו באתר ולשתף היכן שתרצו.</li>
+                        </ul>
+                    </div><br />
+                    <div className='closing-text'>
+                        לעוד מידע על העמותה וכלל הפרויקטים שלנו מוזמנים לאתר מצעד הגבורה
+                        <br />
+                        <button onClick={onStartButtonClick}>בואו נתחיל</button>
                     </div>
                     <br /><br />
                     <div className='developmentInfo'>
@@ -121,9 +131,11 @@ function Homepage() {
                         {data.developmentInfo.versions[1].number}: <br />
                         {data.developmentInfo.versions[1].members}
                     </div>
-                    <button onClick={onStartButtonClick}>בואו נתחיל</button>
-                </Body>
+                </Card>
             </div>
+
+
+
             <div className="phoneComponent">
                 <ThemeProvider theme={theme}>
                     <Box
@@ -136,7 +148,6 @@ function Homepage() {
                         }}
                         dir="rtl"
                     >
-
 
                         <img src="/logo1.png" alt="logo" width="220px" height="90px" />
 
