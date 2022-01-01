@@ -1,23 +1,7 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 import './homepage.scss';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import { Div, DivForm, FullInput, Root } from '../auth/Design/styledComponents';
 import Card from '@mui/material/Card';
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#616161',
-            dark: '#373737',
-        },
-        secondary: {
-            main: '#ff6900',
-            dark: '#ba000d',
-        },
-    },
-});
 
 
 function Homepage() {
@@ -99,63 +83,39 @@ function Homepage() {
 
     return (
         <div className='homepage-container' dir="rtl">
-            <div className="pcComponent">
-                <Card sx={{ p: "40px", maxWidth: "150vh" }}>
-                    <h1 className='header'>
-                        <img src="/logo1.png" alt="logo" width="220px" height="90px" style={{ "margin-top": "100px", "margin-bottom": "100px" }} />
-                        <br />
-                        ברוכים הבאים למקום בו אפשר ליצור <br />
-                        <b>#העצמה_אחת_ביום</b>
-                    </h1><br />
-                    <div className='opening-text'>
-                        בהשראת סיפורים של גיבורים וגיבורות מהשואה.<br />
-                        המוטו שלנו הוא "לעשות ולא לשכוח". <br />
-                        באתר אתם מוזמנים:
-                        <ul>
-                            <li><b>לקרוא</b> סיפורי גבורה, העצמה אישית וסיפורים מעוררי השראה. </li>
-                            <li><b>לבחור</b> סיפור אותו תרצו לשתף.
-                                בין אם זה ביום הזיכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה.</li>
-                            <li><b>לעצב</b> אותו באתר ולשתף היכן שתרצו.</li>
-                        </ul>
-                    </div><br />
-                    <div className='closing-text'>
-                        לעוד מידע על העמותה וכלל הפרויקטים שלנו מוזמנים לאתר מצעד הגבורה
-                        <br />
-                        <button onClick={onStartButtonClick}>בואו נתחיל</button>
-                    </div>
+            <Card sx={{ p: "40px", maxWidth: "150vh" }}>
+                <h1 className='header'>
+                    <img src="/logo1.png" alt="logo" width="220px" height="90px" style={{ "margin-top": "100px", "margin-bottom": "100px" }} />
+                    <br />
+                    ברוכים הבאים למקום בו אפשר ליצור <br />
+                    <b>#העצמה_אחת_ביום</b>
+                </h1><br />
+                <div className='opening-text'>
+                    בהשראת סיפורים של גיבורים וגיבורות מהשואה.<br />
+                    המוטו שלנו הוא "לעשות ולא לשכוח". <br />
+                    באתר אתם מוזמנים:
+                    <ul>
+                        <li><b>לקרוא</b> סיפורי גבורה, העצמה אישית וסיפורים מעוררי השראה. </li>
+                        <li><b>לבחור</b> סיפור אותו תרצו לשתף.
+                            בין אם זה ביום הזיכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה.</li>
+                        <li><b>לעצב</b> אותו באתר ולשתף היכן שתרצו.</li>
+                    </ul>
+                </div><br />
+                <div className='closing-text'>
+                    לעוד מידע על העמותה וכלל הפרויקטים שלנו מוזמנים לאתר מצעד הגבורה
                     <br /><br />
-                    <div className='developmentInfo'>
-                        {data.developmentInfo.content}
-                        {data.developmentInfo.versions[0].number}: <br />
-                        {data.developmentInfo.versions[0].members}
-                        {data.developmentInfo.versions[1].number}: <br />
-                        {data.developmentInfo.versions[1].members}
-                    </div>
-                </Card>
-            </div>
-
-
-
-            <div className="phoneComponent">
-                <ThemeProvider theme={theme}>
-                    <Box
-                        sx={{
-                            mx: 'auto',
-                            px: 2,
-                            pt: 3,
-                            textAlign: 'center',
-                            fontWeight: 'medium',
-                        }}
-                        dir="rtl"
-                    >
-
-                        <img src="/logo1.png" alt="logo" width="220px" height="90px" />
-
-
-                    </Box>
-                </ThemeProvider>
-            </div>
-        </div>
+                    <button onClick={onStartButtonClick}>בואו נתחיל</button>
+                </div>
+                <br /><br />
+                <div className='developmentInfo'>
+                    {data.developmentInfo.content}
+                    {data.developmentInfo.versions[0].number}: <br />
+                    {data.developmentInfo.versions[0].members}
+                    {data.developmentInfo.versions[1].number}: <br />
+                    {data.developmentInfo.versions[1].members}
+                </div>
+            </Card>
+        </div >
     );
 }
 
