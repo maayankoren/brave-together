@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import './app.scss';
 import { Switch, Route, BrowserRouter, withRouter } from 'react-router-dom';
-//import { NativeRouter, BackButton } from 'react-router-native';
+// import { NativeRouter, BackButton } from 'react-router-native';
 import Template from './template/template';
 import StoryCheck from './storyCheck/storyCheck';
 import Testimony from './testimony/testimony';
@@ -14,13 +14,14 @@ import About from './about/about';
 import Footer from './footer/footer'
 import Homepage from './homepage/homepage';
 
-//import BackButton from './backButton/backButton';
+// import BackButton from './backButton/backButton';
 import ThankYouForComing from './thankYouForComing/thankYouForComing';
 import Header from './header/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
 import StoryCheckNew from './storyCheckNew/StoryCheckNew';
+import Collections from './collections/Collections';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={Homepage} />
         <Route exact path='/storyCheck' component={StoryCheckNew} />
+        <Route exact path='/collections' component={Collections} />
         <Route exact path='/testimony' component={Testimony} />
         <Route exact path='/textEdit' component={TextEdit} />
         <Route exact path='/storyUpload' component={StoryUpload} />

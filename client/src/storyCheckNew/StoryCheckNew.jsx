@@ -1,17 +1,8 @@
 import React, { useState } from 'react'
 import './storyCheckNew.css'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-import { faBookmark } from '@fortawesome/free-solid-svg-icons';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-
-
-
-
-
-
-
+import StoryCheckIcon from '../assets/icons/StoryCheck.svg'
+import StoryCheckIconSelected from '../assets/icons/StoryCheckSelected.svg'
 
 
 const stories = [
@@ -95,12 +86,10 @@ const StoryCheckNew = () => {
     const [selected, setSelected] = useState([])
 
     const handleSave = (story) => {
-        console.log(story)
 
         setSelected([...selected, story])
         let selectedStory = allStories.findIndex(item => item.id == story.id);
         let prevStories = allStories;
-        console.log()
         prevStories[selectedStory].save = !prevStories[selectedStory].save;
         setAllStories(prevStories)
     }
@@ -119,8 +108,8 @@ const StoryCheckNew = () => {
                         >
                             {
                                 story.save && selected
-                                    ? <FontAwesomeIcon icon={faBookmark} />
-                                    : <FontAwesomeIcon icon={faCoffee} />
+                                    ? <img className="cardIcon" src={StoryCheckIconSelected}/> 
+                                    : <img className="cardIcon" src={StoryCheckIcon}/> 
                             }
                         </div>
                     </div>
