@@ -137,9 +137,7 @@ export default function LoginSignup({ isSignup }) {
 
     let data = {
         "header": {
-            "content": ["אנו מזמינים אותך ליצור",
-                "#העצמה_אחת_ביום",
-                "בהשראת סיפורי הגיבורים והגיבורות שלנו"],
+            "content": ['על מנת ליצור ולשמור השראות יש להירשם למערכת'],
             "color": "black",
         },
     }
@@ -193,7 +191,20 @@ export default function LoginSignup({ isSignup }) {
 
                         <form>
                             <Box sx={{ fontSize: 20 }}>{data.header.content.join('\n')}</Box>
-                            <img src="/logo1.png" alt="logo" width="220px" height="90px" />
+                            <h2>הרשמה</h2>
+                            {/* <img src="/logo1.png" alt="logo" width="220px" height="90px" /> */}
+                            {
+                                isSignup && <>
+
+                                    <div className='name-container'>
+                                        <TextField required fullWidth className="first-name" id="firstName" label="שם פרטי" variant="outlined" margin="normal" onChange={handleChange('firstName')} />
+                                        <TextField required fullWidth id="lastName" label="שם משפחה" variant="outlined" margin="normal" onChange={handleChange('lastName')} />
+                                    </div>
+                                        <TextField fullWidth id="phone" type="phone" label="פלאפון" variant="outlined" margin="normal" onChange={handleChange('phone')} />
+
+                                </>
+
+                            }
                             <TextField required fullWidth id="email" label="אימייל" variant="outlined" margin="normal" onChange={handleChange('email')} />
                             <span style={{
                                 fontWeight: 'bold',
@@ -221,14 +232,7 @@ export default function LoginSignup({ isSignup }) {
                                     label="סיסמה"
                                 />
                             </FormControl>
-                            {
-                                isSignup && <>
-                                    <TextField required fullWidth id="firstName" label="שם פרטי" variant="outlined" margin="normal" onChange={handleChange('firstName')} />
-                                    <TextField fullWidth id="lastName" label="שם משפחה" variant="outlined" margin="normal" onChange={handleChange('lastName')} />
-                                    <TextField fullWidth id="phone" type="phone" label="פלאפון" variant="outlined" margin="normal" onChange={handleChange('phone')} />
-                                </>
 
-                            }
 
                             <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                                 <FormControlLabel control={<Checkbox style={{ marginTop: "-1" }} />} label="זכור אותי" />

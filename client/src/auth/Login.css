@@ -2,6 +2,23 @@
     display: block;
 }
 
+.login .name-container{
+    display: flex;
+}
+
+.login .first-name{
+    margin-left: 20px !important;
+}
+
+.login .MuiBox-root .css-bk9fzy{
+margin-bottom: 20px;
+}
+
+.login label  {
+width: 100%;
+display: flex;
+}
+
 .login .pcComponent Input,
 .login .pcComponent Label {
     margin-left: auto;

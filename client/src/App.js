@@ -17,7 +17,7 @@ import Homepage from './homepage/homepage';
 import ThankYouForComing from './thankYouForComing/thankYouForComing';
 import Header from './header/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import LoginSignup from './auth/LoginSignup';
+import LoginSignup from './auth/LoginSignup.jsx';
 
 function App() {
   return (
