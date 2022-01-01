@@ -1,0 +1,15 @@
+
+.login .pcComponent Input,
+.login .pcComponent Label {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.login .phoneComponent .button {
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+    font-size: 23px;
+    color: white
+}

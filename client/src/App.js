@@ -19,29 +19,27 @@ import Header from './header/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
-import login from './login/login';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header></Header>
-      <Switch>
-        <Route exact path='/' component={Homepage} />
-        <Route exact path='/storyCheck' component={StoryCheck} />
-        <Route exact path='/testimony' component={Testimony} />
-        <Route exact path='/textEdit' component={TextEdit} />
-        <Route exact path='/storyUpload' component={StoryUpload} />
-        <Route exact path='/templateEdit' component={TemplateEdit} />
-        <Route exact path='/share' component={Share} />
-        <Route exact path='/thankYouForComing' component={ThankYouForComing} />
-        <Route exact path='/About' component={About} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/logindev' component={login} />
-        <Route exact path='/signup' component={SignUp} />
-        <Route path='*' component={() => '404 Not Found'} />
-      </Switch>
-      <Footer></Footer>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Header></Header>
+        <Switch>
+          <Route exact path='/' component={Homepage} />
+          <Route exact path='/storyCheck' component={StoryCheck} />
+          <Route exact path='/testimony' component={Testimony} />
+          <Route exact path='/textEdit' component={TextEdit} />
+          <Route exact path='/storyUpload' component={StoryUpload} />
+          <Route exact path='/templateEdit' component={TemplateEdit} />
+          <Route exact path='/share' component={Share} />
+          <Route exact path='/thankYouForComing' component={ThankYouForComing} />
+          <Route exact path='/About' component={About} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/signup' component={SignUp} />
+          <Route path='*' component={() => '404 Not Found'} />
+        </Switch>
+        <Footer></Footer>
+      </BrowserRouter>
   );
 }
 
