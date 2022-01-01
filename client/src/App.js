@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import './app.scss';
 import { Switch, Route, BrowserRouter, withRouter } from 'react-router-dom';
-//import { NativeRouter, BackButton } from 'react-router-native';
+// import { NativeRouter, BackButton } from 'react-router-native';
 import Template from './template/template';
 import StoryCheck from './storyCheck/storyCheck';
 import Testimony from './testimony/testimony.jsx';
@@ -23,16 +23,18 @@ import LoginSignup from './auth/LoginSignup';
 // import SignUp from './auth/SignUp';
 import ProtectedRoute from './protectedRoute/ProtectedRoute';
 import Quotes from './quotes/Quotes';
-
+import StoryCheckNew from './storyCheckNew/StoryCheckNew';
+import Collections from './collections/Collections';
 function App() {
   return (
     <BrowserRouter>
       <Header></Header>
       <Switch>
         <Route exact path='/' component={Homepage} />
-        <Route exact path='/storyCheck' component={StoryCheck} />
+        <Route exact path='/storyCheck' component={StoryCheckNew} />
         <Route exact path='/testimony/:storyId' component={Testimony} />
         <Route exact path='/textEdit' component={TextEdit} />
+        <Route exact path='/collections' component={Collections} />
         <ProtectedRoute exact path='/storyUpload' component={StoryUpload} />
         <Route exact path='/unauthorized' component={UnAuthorizedPage}/>
         <Route exact path='/templateEdit' component={TemplateEdit} />
@@ -44,7 +46,7 @@ function App() {
         <Route exact path='/quotes' component={Quotes} />
         <Route path='*' component={() => '404 Not Found'} />
       </Switch>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </BrowserRouter>
   );
 }
