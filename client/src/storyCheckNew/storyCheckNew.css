@@ -14,7 +14,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  gap: 1.25rem;
+  /* gap: 1.25rem; */
   padding: 2.5rem 0;
 }
 .card {
