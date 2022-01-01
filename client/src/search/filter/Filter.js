@@ -32,7 +32,7 @@ const FILTERS = [
     }
 ]
 
-const Filter = () => {
+const Filter = ({data,setFilteredData}) => {
     const [isOpen,setIsOpen]= useState(false);
     const [filters,setFilters] = useState(FILTERS)
     const [selectedFilters,setSelectedFilters]=useState([])
@@ -75,8 +75,13 @@ const Filter = () => {
     }
 
     const handleSelectedFilters=()=>{
-        //fiter data with the selected filters
-
+        if(selectedFilters){
+          const tempData = data.filter(item=>item.tags.some(tag=> selectedFilters.includes(tag)))
+          if(tempData.length>0){
+              setFilters(tempData)
+          }
+        }
+        handleCloseFilters()
     }
 
     const handleCloseFilters =()=>{
@@ -89,16 +94,14 @@ const Filter = () => {
     return (
         <div className='Filter'>
             <div className='filter-button'>
-                <button>
-                    <img src='./search.png' alt='filters' onClick={handleFiltersClick}/>
-                </button>
+                <button onClick={handleFiltersClick}>filters</button>
             </div>
             {isOpen &&
                  <div className='filters'>
                      <div className='filters-line'>
-                        <button onClick={handleSelectedFilters}>OK</button>
-                        <h2>סינון</h2>
-                        <button onClick={handleCloseFilters}>BACK</button>
+                        <div  className='filters-button' onClick={handleSelectedFilters}>✓</div>
+                        <h3>סינון</h3>
+                        <div className='filters-button' onClick={handleCloseFilters}>✕</div>
                      </div>
                      <div className='filters-container'>
                         {renderFilters()}

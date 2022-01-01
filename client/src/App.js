@@ -25,6 +25,7 @@ import SignUp from './auth/SignUp';
 import ProtectedRoute from './protectedRoute/ProtectedRoute';
 import Quotes from './quotes/Quotes';
 
+
 function App() {
   return (
     <BrowserRouter>

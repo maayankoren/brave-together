@@ -4,32 +4,22 @@ import './Search.css'
 import Filter from './filter/Filter'
 
 const API_URL = "http://api-url"
-const Search = () => {
-    const [data,setData] = useState([])
-    const [filteredData,setFilteredData] = useState([])
+const Search = ({allData,setFilteredData}) => {
     const searchInputRef = useRef();
+    const[currentData,setCurrentData]=useState(allData);
 
     useEffect(()=>{
         searchInputRef.current.focus();
-        //api call to get all the data
-        axios
-            .get(API_URL)
-            .then(res=>{
-                if(res.data){
-                    setData(res.data)
-                }
-            })
     },[])
 
     const handleChange = (event)=>{
-        const term = event.target.value.toLowerCase();
-        //filter the data and find the relevant items
-        if(data){
+        const term = event.target.value;
+        if(allData){
             //need to figure out how data written in the api (story/author/country)
-            const relevantData = data.filter(
-                (item)=>(item.story.toLowerCase().includes(term))||
-                (item.author.toLowerCase().includes(term))||
-                (item.country.toLowerCase().includes(term)))
+            const relevantData = allData
+            .filter((item)=>(item.text.includes(term))||
+                (item.author.includes(term))||
+                (item.country.includes(term)))
 
             if(relevantData){
                 setFilteredData(relevantData)
@@ -37,16 +27,6 @@ const Search = () => {
         }
     }
 
-    const renderFilteredData=()=>{
-        return(
-            filteredData.map((item)=>{
-                return(
-                    // figure out the template of the items
-                    item
-                )
-            })
-        )
-    }
     return (
         <div className='Search'>
             <div className='search-form'>
@@ -59,12 +39,7 @@ const Search = () => {
                         placeholder="חיפוש לפי שם סיפור,גיבור/ה או מדינה"/>
                 </form>
             </div>
-            <Filter/>
-            <div className='data-container'>
-                {filteredData &&
-                    renderFilteredData()
-                }
-            </div>
+            <Filter data={currentData} setFilteredData={setFilteredData}/>
         </div>
     )
 }
