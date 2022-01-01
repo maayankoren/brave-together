@@ -72,12 +72,7 @@ const stories = [
         heroName: 'Hero 5',
         storyImg: "https://images.unsplash.com/photo-1628214460051-cb2102d028a4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
     },
-    {
-        id: 12,
-        save: false,
-        heroName: 'Hero 6',
-        storyImg: "https://media.istockphoto.com/photos/friends-red-cat-and-corgi-dog-walking-in-a-summer-meadow-under-the-picture-id1324099927?b=1&k=20&m=1324099927&s=170667a&w=0&h=_jRsZpMNYr--izDfsMtCB7MV97R-yMphyDTjcav85xc="
-    },
+   
 
 ]
 
@@ -102,7 +97,6 @@ const StoryCheckNew = () => {
                     className="card"
                     key={story.id}
                 >
-                    <div className="cardIcon">
                         <div
                             onClick={() => handleSave(story)}
                         >
@@ -112,7 +106,6 @@ const StoryCheckNew = () => {
                                     : <img className="cardIcon" src={StoryCheckIcon}/> 
                             }
                         </div>
-                    </div>
                     <img className="cardImg"
 
                         src={story.storyImg}

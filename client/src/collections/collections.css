@@ -13,7 +13,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
   gap: 1.25rem;
   padding: 2.5rem 0;
 }
@@ -21,14 +20,16 @@
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-  justify-content: space-evenly;
-  width: 11.065rem;
+  justify-content: space-around;
+  flex:0 1 10rem;
+  width: 10.2rem;
   height: 7.125rem;
   border-radius: 0.25rem;
   cursor: pointer;
   background-color: #e2e1df;
   overflow: hidden;
   position: relative;
+  margin-right:0.4rem;  
 }
 
 .titleImg {
