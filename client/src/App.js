@@ -23,6 +23,8 @@ import LoginSignup from './auth/LoginSignup';
 // import SignUp from './auth/SignUp';
 import ProtectedRoute from './protectedRoute/ProtectedRoute';
 import Quotes from './quotes/Quotes';
+import Collections from './collections/Collections';
+import StoryCheckNew from './storyCheckNew/StoryCheckNew';
 
 function App() {
   return (
@@ -30,17 +32,19 @@ function App() {
       <Header></Header>
       <Switch>
         <Route exact path='/' component={Homepage} />
-        <Route exact path='/storyCheck' component={StoryCheck} />
+        {/* <Route exact path='/storyCheck' component={StoryCheck} /> */}
+        <Route exact path='/storyCheck' component={StoryCheckNew} />
+        <Route exact path='/collections' component={Collections} />
         <Route exact path='/testimony/:storyId' component={Testimony} />
         <Route exact path='/textEdit' component={TextEdit} />
         <ProtectedRoute exact path='/storyUpload' component={StoryUpload} />
-        <Route exact path='/unauthorized' component={UnAuthorizedPage}/>
+        <Route exact path='/unauthorized' component={UnAuthorizedPage} />
         <Route exact path='/templateEdit' component={TemplateEdit} />
         <Route exact path='/share' component={Share} />
         <Route exact path='/thankYouForComing' component={ThankYouForComing} />
         <Route exact path='/About' component={About} />
         <Route exact path='/login' component={LoginSignup} />
-          <Route exact path='/signup' render={()=><LoginSignup isSignup={true}></LoginSignup>} />
+        <Route exact path='/signup' render={() => <LoginSignup isSignup={true}></LoginSignup>} />
         <Route exact path='/quotes' component={Quotes} />
         <Route path='*' component={() => '404 Not Found'} />
       </Switch>
