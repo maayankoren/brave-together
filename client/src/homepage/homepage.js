@@ -102,7 +102,7 @@ function Homepage() {
             <div className='closing-text'>
                 לעוד מידע על העמותה וכלל הפרויקטים שלנו מוזמנים לאתר 
                 <a href='https://brave-together.com/'>
-                    מצעד הגבורה
+                    "מצעד הגבורה"
                 </a>
                 <br /><br />
                 <button onClick={onStartButtonClick}>בואו נתחיל</button>
