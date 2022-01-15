@@ -114,9 +114,6 @@ export default function Login() {
         },
     }
 
-    document.body.style.background = "rgba(255, 255, 255, 0.1) url('https://brave-together.com/wp-content/uploads/2020/04/IMG_3198-2-1.jpg')";
-    document.body.style.backgroundSize = "100vw 100vh"
-
     return (
         <div className='login'>
             <div className="pcComponent">
