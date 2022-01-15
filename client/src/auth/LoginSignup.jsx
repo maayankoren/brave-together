@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Submit, Input, DivForm, Input2, Label2, Header, Label, LogoImg, Body } from './Design/styledComponents';
 import { useHistory, BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import logo from '../assets/images/Logo.jpg';
+// import logo from '../assets/images/Logo.jpg';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -18,8 +18,13 @@ import Checkbox from '@mui/material/Checkbox';
 import { NavLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import "./Login.css";
+import "./Login.scss";
 import validator from 'validator'
+import { GoogleLogin } from 'react-google-login';
+import brand from './brand.png'
+
+
+
 
 
 const theme = createTheme({
@@ -47,6 +52,7 @@ export default function LoginSignup({ isSignup }) {
         lastName: '',
         phone: ''
     });
+
 
     useEffect(() => {
         // const token = localStorage.getItem('token');
@@ -83,39 +89,39 @@ export default function LoginSignup({ isSignup }) {
     }
 
     const onLoginSignup = async () => {
+        const { email, password, firstName, lastName, phone } = values
         if (isSignup) {
-            const { email, password, firstName, lastName, phone } = values
-            const creds = {
-                email,
-                password,
-                first_name: firstName,
-                last_name: lastName,
-                cellphone: phone
-            }
-            var config = {
-                method: 'post',
-                url: 'http://localhost:5000/user',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                data: creds
-            };
-
-            try {
-                await axios(config)
-                doLogin(email, password)
-            } catch (err) {
-                let message = typeof err.response !== "undefined" ? err.response.data.message : err.message;
-                setValues({ ...values, emailError: message })
-            }
-
+            doSignup(email, password, firstName, lastName, phone)
         } else {
-            const { email, password } = values
             doLogin(email, password)
         }
     }
 
+    const doSignup = async (email, password, firstName, lastName, phone) => {
+        const creds = {
+            email,
+            password,
+            first_name: firstName,
+            last_name: lastName || '',
+            cellphone: phone || ''
+        }
+        var config = {
+            method: 'post',
+            url: 'http://localhost:5000/user',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            data: creds
+        };
 
+        try {
+            await axios(config)
+            doLogin(email, password)
+        } catch (err) {
+            let message = typeof err.response !== "undefined" ? err.response.data.message : err.message;
+            setValues({ ...values, emailError: message })
+        }
+    }
 
     const doLogin = async (email, password) => {
         try {
@@ -127,12 +133,38 @@ export default function LoginSignup({ isSignup }) {
             })
             localStorage.setItem('token', data.token);
             alert("logged in successfully!");
-            history.push("/");
+            window.location.href = '/'
         } catch (err) {
             let message = typeof err.response !== "undefined" ? err.response.data.message : err.message;
             setValues({ ...values, emailError: message })
+            throw err
         }
     }
+
+
+
+
+
+    const onGoogleLoginSuccess = async (res) => {
+        console.log('res.profileObj:', res.profileObj);
+        const { email, googleId, familyName, givenName } = res.profileObj
+        try {
+            await doLogin(email, googleId)
+            const token = localStorage.getItem('token');
+            if (!token) {
+                doSignup(email, googleId, givenName, familyName)
+            }
+
+        } catch (err) {
+            setValues({ ...values, emailError: 'Try Another Email Address' })
+
+        }
+    }
+
+    const onLoginFailure = (res) => {
+        console.log(res);
+    }
+
 
 
     let data = {
@@ -190,8 +222,21 @@ export default function LoginSignup({ isSignup }) {
                     >
 
                         <form>
-                            <Box sx={{ fontSize: 20 }}>{data.header.content.join('\n')}</Box>
-                            <h2>הרשמה</h2>
+                            {
+                                isSignup ? <>
+                                    <Box sx={{ fontSize: 20 }}>{data.header.content.join('\n')}</Box>
+                                    <h2>הרשמה</h2>
+                                </> :
+                                    <div className='head'>
+                                        <section>
+                                            <h2>אנו מזמינים אותך ליצור</h2>
+                                            <h2>#העצמה_אחת_ביום</h2>
+                                            <h2>בהשראת שיפורי הגיבורים והגיבורות שלנו</h2>
+                                        </section>
+                                        <img src={brand} />
+                                    </div>
+                            }
+
                             {/* <img src="/logo1.png" alt="logo" width="220px" height="90px" /> */}
                             {
                                 isSignup && <>
@@ -200,7 +245,7 @@ export default function LoginSignup({ isSignup }) {
                                         <TextField required fullWidth className="first-name" id="firstName" label="שם פרטי" variant="outlined" margin="normal" onChange={handleChange('firstName')} />
                                         <TextField required fullWidth id="lastName" label="שם משפחה" variant="outlined" margin="normal" onChange={handleChange('lastName')} />
                                     </div>
-                                        <TextField fullWidth id="phone" type="phone" label="פלאפון" variant="outlined" margin="normal" onChange={handleChange('phone')} />
+                                    <TextField fullWidth id="phone" type="phone" label="פלאפון" variant="outlined" margin="normal" onChange={handleChange('phone')} />
 
                                 </>
 
@@ -236,7 +281,7 @@ export default function LoginSignup({ isSignup }) {
 
                             <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                                 <FormControlLabel control={<Checkbox style={{ marginTop: "-1" }} />} label="זכור אותי" />
-                                <NavLink to={"/"} style={{ margin: "9px", color: "#c53d13", textDecoration: "none" }}>שכחת סיסמה?</NavLink>
+                                {/* <NavLink to={"/"} style={{ margin: "9px", color: "#c53d13", textDecoration: "none" }}>שכחת סיסמה?</NavLink> */}
                             </FormGroup>
                             <Button variant="contained" color="secondary" onClick={onLoginSignup} className="button">{isSignup ? 'הירשם' : 'התחבר'}</Button>
                         </form>
@@ -246,11 +291,32 @@ export default function LoginSignup({ isSignup }) {
                             <br />או באמצעות
                             <hr size="5" color="#000000" width="90px" noshade style={{ marginTop: "29px" }} />
                         </FormGroup>
-                        <FormGroup style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", fontSize: "13px" }}>
-                            <img src="/google icon.png" alt="google" style={{ width: "75px" }} />
-                            <img src="/facebook icon.png" alt="facebook" style={{ width: "75px" }} />
-                        </FormGroup>
-                        <Button variant="contained" color="primary" onClick={handleMoveBtn} className="button">{isSignup ? 'התחבר' : 'הירשם'}</Button>
+                        <div>
+
+
+
+
+
+
+                            <GoogleLogin
+                                className='google-login'
+                                render={renderProps => (
+                                    <img src="/google icon.png" alt="google" onClick={renderProps.onClick} style={{ width: "75px" }} />
+                                )}
+                                clientId={'923832333004-bd9v2kdt55dufals9hdpth9ojge1d7al.apps.googleusercontent.com'}
+                                buttonText=""
+                                onSuccess={onGoogleLoginSuccess}
+                                onFailure={onLoginFailure}
+                                cookiePolicy={'single_host_origin'}
+
+                            />
+
+
+
+                        </div>
+                        {
+                            !isSignup && <Button variant="contained" color="primary" onClick={handleMoveBtn} className="button">הירשם</Button>
+                        }
                         {/* <div style={{ margin: "10px" }}> */}
                         <Box sx={{ height: 50, padding: 1.5 }}>
                             <NavLink to={"/"} style={{ fontSize: "17px", color: "black", textDecoration: "none" }}>דלג לבינתיים</NavLink>
@@ -259,6 +325,11 @@ export default function LoginSignup({ isSignup }) {
                         </Box>
                     </Box>
                 </ThemeProvider>
+
+
+
+
+
             </div>
         </div>
     );
