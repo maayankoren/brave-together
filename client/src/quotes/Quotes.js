@@ -6,7 +6,7 @@ import './Quotes.css'
 import Search from '../search/Search'
 
 
-
+const DATA = mock.quotes;
 const Quotes = () => {
     //quotes => arrary of object contains text,author and number-of-Shares
     const [quotes,setQuotes ] = useState(mock.quotes)
@@ -39,7 +39,7 @@ const Quotes = () => {
 
     return (
         <>
-            <Search allData={mock.quotes} setFilteredData={setQuotes}/>
+            <Search allData={DATA} setFilteredData={setQuotes}/>
             <div className='Quotes'>
                 {quotes && 
                     renderQuotes()

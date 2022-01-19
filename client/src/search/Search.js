@@ -3,7 +3,7 @@ import axios from 'axios'
 import './Search.css'
 import Filter from './filter/Filter'
 
-const API_URL = "http://api-url"
+
 const Search = ({allData,setFilteredData}) => {
     const searchInputRef = useRef();
     const[currentData,setCurrentData]=useState(allData);
@@ -21,8 +21,11 @@ const Search = ({allData,setFilteredData}) => {
                 (item.author.includes(term))||
                 (item.country.includes(term)))
 
-            if(relevantData){
+            if(relevantData.length>0){
                 setFilteredData(relevantData)
+            }
+            else{
+                setFilteredData([])
             }
         }
     }

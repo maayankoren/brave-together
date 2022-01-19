@@ -76,12 +76,30 @@ const Filter = ({data,setFilteredData}) => {
 
     const handleSelectedFilters=()=>{
         if(selectedFilters){
-          const tempData = data.filter(item=>item.tags.some(tag=> selectedFilters.includes(tag)))
+            const tempData = []
+            for (let i = 0; i < data.length; i++) {
+                const element = data[i];
+                for (let j = 0; j < element.tags.length; j++) {
+                    const tag = element.tags[j];
+                    for (let k = 0; k < selectedFilters.length; k++) {
+                        const filter = selectedFilters[k];
+                        if(tag.name===filter.name){
+                            if(tempData.filter(i=>i===element).length===0){
+                                tempData.push(element)
+                            }
+                        }
+                    }
+                }
+            }
           if(tempData.length>0){
-              setFilters(tempData)
+              setFilteredData(tempData)
           }
+          else{
+              setFilteredData(data)
+          }
+
+          setIsOpen(!isOpen)
         }
-        handleCloseFilters()
     }
 
     const handleCloseFilters =()=>{
@@ -94,7 +112,7 @@ const Filter = ({data,setFilteredData}) => {
     return (
         <div className='Filter'>
             <div className='filter-button'>
-                <button onClick={handleFiltersClick}>filters</button>
+            <img className='img-btn' onClick={handleFiltersClick} src="https://img.icons8.com/material/24/000000/filter--v1.png"/>
             </div>
             {isOpen &&
                  <div className='filters'>
