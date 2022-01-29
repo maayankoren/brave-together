@@ -2,6 +2,7 @@ import React from 'react'
 import './QuoteBox.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faShareAlt} from '@fortawesome/free-solid-svg-icons'
+import Search from '../../search/Search';
 
 
 const QuoteBox = ({text,numOfShares,author,id}) => {

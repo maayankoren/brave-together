@@ -1,0 +1,80 @@
+.Filter{
+    background-color: #fff;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: .5rem;
+}
+.img-btn{
+    width: auto;
+    height: auto;
+    cursor:pointer; 
+}
+.filters{
+    position: absolute;
+    margin-top: 2rem;
+    width: 70%;
+    height: auto;
+    max-height: 70vh;
+    background: #fff;
+    border-radius: 4px;
+    padding: 20px;
+    border: 1px solid #999;
+    overflow: auto;
+}
+.filters-line{
+    display: flex;
+    justify-content: space-between;
+}
+.filter{
+    margin: 4px ;
+    border: 1px solid black;
+    background-color: #C4C4C4;
+    border-radius: 4px;
+    cursor: pointer;
+    padding:0 10px;
+}
+.filter:hover{
+    transform: translateY(-.1rem);
+    transition: all .2s;
+}
+.filter-selected{
+    margin: 4px ;
+    border: 1px solid black;
+    background-color: #3F3F3F;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    padding:0 10px;
+
+}
+.filters-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-around;
+
+}
+.filters-button{
+    border:1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 2rem;
+    width: 2rem;
+}
+.filters-button:hover{
+    color: white;
+    background-color: gray;
+    transform: scale(1.2);
+}
+
+@media screen and (max-width:600px) {
+
+    .filters-button{
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+}
