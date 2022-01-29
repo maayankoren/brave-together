@@ -7,7 +7,7 @@ import Template from './template/template';
 import StoryCheck from './storyCheck/storyCheck';
 import Testimony from './testimony/testimony';
 import TextEdit from './text/text';
-import StoryUpload from './StoryUploadNew/StoryUpload';
+import StoryUpload from './storyUpload/StoryUpload';
 import TemplateEdit from './templateEdit/template-edit';
 import Share from './share/share';
 import About from './about/about';
