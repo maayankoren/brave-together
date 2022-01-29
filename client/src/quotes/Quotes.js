@@ -29,13 +29,13 @@ const Quotes = () => {
             )
         })
     }
-    const renderMock=()=>{
-        return mock.quotes.map((q)=>{
-            return(
-                <QuoteBox key={q.id} id={q.id} text={q.text} numOfShares={q.shares} author={q.author}/>
-            )
-        })
-    }
+    // const renderMock=()=>{
+    //     return mock.quotes.map((q)=>{
+    //         return(
+    //             <QuoteBox key={q.id} id={q.id} text={q.text} numOfShares={q.shares} author={q.author}/>
+    //         )
+    //     })
+    // }
 
     return (
         <>

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef,useState } from 'react'
-import axios from 'axios'
 import './Search.css'
 import Filter from './filter/Filter'
 
@@ -13,13 +12,12 @@ const Search = ({allData,setFilteredData}) => {
     },[])
 
     const handleChange = (event)=>{
-        const term = event.target.value;
+        const term = event.target.value.toLowerCase();
         if(allData){
-            //need to figure out how data written in the api (story/author/country)
             const relevantData = allData
-            .filter((item)=>(item.text.includes(term))||
-                (item.author.includes(term))||
-                (item.country.includes(term)))
+            .filter((item)=>(item.text.toLowerCase().includes(term))||
+                (item.author.toLowerCase().includes(term))||
+                (item.country.toLowerCase().includes(term)))
 
             if(relevantData.length>0){
                 setFilteredData(relevantData)
