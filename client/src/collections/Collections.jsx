@@ -61,16 +61,16 @@ function Collections() {
                 <div
                     onClick={() => handleSelect(category.id)}
                     key={category.id}
-                    className="categoryCard"
+                    className="collections-categoryCard"
                 >
 
-                    <img className="titleImg"
+                    <img className="categoryCard-titleImg"
 
                         src={category.img}
                         alt={category.title}
                     />
 
-                    <div className="titleText">
+                    <div className="categoryCard-titleText">
                         <h6
                         >
                             {category.title}

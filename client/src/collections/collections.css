@@ -15,7 +15,7 @@
   padding: 2.5rem 0;
 }
 
-.categoryCard {
+.collections-categoryCard {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
@@ -31,12 +31,12 @@
   margin-right: 0.4rem;
 }
 
-.titleImg {
+.categoryCard-titleImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.titleText {
+.categoryCard-titleText {
   background-color: #105e7d;
   opacity: 80%;
   height: 1.82rem;
@@ -45,7 +45,7 @@
   position: absolute;
   bottom: 0;
 }
-.titleText h6 {
+.categoryCard-titleText h6 {
   color: white;
   text-align: center;
   line-height: 200%;
