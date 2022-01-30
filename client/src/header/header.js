@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import "./header.scss";
 import menu1 from "../assets/images/menu1.png";
 import Logo from "../assets/images/Logo.jpg";
+import user from "../assets/images/user.png";
 
 export const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false)
@@ -13,7 +14,13 @@ export const Header = () => {
 
   return (
     <header className="app-header">
-      <div className="user-container">User</div>
+      <div >
+      
+        <img  className="user-container"src={user}/>
+        
+      
+      </div>
+      <div className ="hi-guest">שלום אורח</div>
       <div className="logo"><img src={Logo}/></div>
       <div className="nav-btn" onClick={onToggleModal}><img className="hamburger" src={menu1}/></div>
 
@@ -30,3 +37,4 @@ export const Header = () => {
   )
 }
 
+export default Header;
