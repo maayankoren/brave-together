@@ -81,33 +81,48 @@ function Homepage() {
     }
 
     return (
-        <div className='homepage-container' dir="rtl">
-            <h1 className='header' style={{ "margin-bottom": "10px" }}>
-                <img src="/logo1.png" alt="logo" width="220px" height="90px" style={{ "margin-top": "30px", "margin-bottom": "50px" }} />
+        <homepage>
+            <div className='homepage-container' dir="rtl">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>
+                <div className='header' style={{ "margin-bottom": "10px" }}>
+                    <br />אנו מזמינים אותך ליצור<br />
+                    <b>#העצמה_אחת_ביום</b>
+                <div className='sub-header'>
+                    בהשראת סיפורים של גיבורים וגיבורות מהשואה.<br />
+                    המוטו שלנו הוא "לעשות ולא לשכוח". <br />
+                </div>
+                </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                <div className='content'>
+                    <ul>
+                        <li><b>לקרוא</b> סיפורי גבורה, העצמה אישית וסיפורים מעוררי השראה. </li>
+                        <li><b>לבחור</b> סיפור אותו תרצו לשתף.
+                            בין אם זה ביום הזיכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה.</li>
+                        <li><b>לעצב</b> אותו באתר <b>ולשתף</b> היכן שתרצו.</li>
+                    </ul>
+                </div>
+
+                        </td>
+                    </tr>
+                </table>
                 <br />
-                ברוכים הבאים למקום בו אפשר ליצור <br />
-                <b>#העצמה_אחת_ביום</b>
-            </h1>
-            <div className='opening-text'>
-                בהשראת סיפורים של גיבורים וגיבורות מהשואה.<br />
-                המוטו שלנו הוא "לעשות ולא לשכוח". <br />
-                באתר אתם מוזמנים:
-                <ul>
-                    <li><b>לקרוא</b> סיפורי גבורה, העצמה אישית וסיפורים מעוררי השראה. </li>
-                    <li><b>לבחור</b> סיפור אותו תרצו לשתף.
-                        בין אם זה ביום הזיכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה.</li>
-                    <li><b>לעצב</b> אותו באתר ולשתף היכן שתרצו.</li>
-                </ul>
-            </div><br />
-            <div className='closing-text'>
-                לעוד מידע על העמותה וכלל הפרויקטים שלנו מוזמנים לאתר 
-                <a href='https://brave-together.com/'>
-                    "מצעד הגבורה"
-                </a>
-                <br /><br />
-                <button onClick={onStartButtonClick}>בואו נתחיל</button>
-            </div>
-        </div >
+                <div className='closing-text'>
+                    לעוד מידע על העמותה וכלל הפרויקטים שלנו מוזמנים לאתר
+                    <a href='https://brave-together.com/'>
+                        "מצעד הגבורה"
+                    </a>
+                    <br /><br />
+                    <button onClick={onStartButtonClick}>בואו נתחיל</button>
+                </div>
+            </div >
+        </homepage>
     );
 }
 

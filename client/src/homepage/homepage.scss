@@ -1,17 +1,28 @@
 .homepage-container {
-
-    display        : flex;
-    justify-content: center;
-    flex-wrap      : wrap;
-    text-align     : right;
-    margin         : 2rem;
+    background-image     : url('../assets/images/homepage\ background.jpg');
+    background-repeat    : no-repeat;
+    background-attachment: scroll;
+    background-size      : cover;
+    width                : 100%;
+    text-align           : right;
+    padding              : 2vh 13vw 0vh 13vw;
 
     .header {
-        text-align: center;
+        display    : block;
+        font-style : normal;
+        font-weight: normal;
+        font-size  : 32px;
+        line-height: 50px;
     }
 
-    .opening-text {
-        font-size: 1.5rem;
+    .sub-header {
+        display  : block;
+        font-size: 20px;
+        line-height: 34px;
+    }
+
+    .content {
+        text-align: left;
     }
 
     .closing-text {
