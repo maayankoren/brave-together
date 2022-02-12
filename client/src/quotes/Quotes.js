@@ -3,12 +3,13 @@ import QuoteBox from './quoteBox/QuoteBox'
 import mock from './mock.json'
 import axios from 'axios'
 import './Quotes.css'
+import Search from '../search/Search'
 
 
-
+const DATA = mock.quotes;
 const Quotes = () => {
     //quotes => arrary of object contains text,author and number-of-Shares
-    const [quotes,setQuotes ] = useState([])
+    const [quotes,setQuotes ] = useState(mock.quotes)
 
     useEffect(()=>{
         axios
@@ -28,21 +29,23 @@ const Quotes = () => {
             )
         })
     }
-    const renderMock=()=>{
-        return mock.quotes.map((q)=>{
-            return(
-                <QuoteBox key={q.id} id={q.id} text={q.text} numOfShares={q.shares} author={q.author}/>
-            )
-        })
-    }
+    // const renderMock=()=>{
+    //     return mock.quotes.map((q)=>{
+    //         return(
+    //             <QuoteBox key={q.id} id={q.id} text={q.text} numOfShares={q.shares} author={q.author}/>
+    //         )
+    //     })
+    // }
 
     return (
-        <div className='Quotes'>
-            {quotes && 
-                renderQuotes()
-            }
-            {renderMock()}
-        </div>
+        <>
+            <Search allData={DATA} setFilteredData={setQuotes}/>
+            <div className='Quotes'>
+                {quotes && 
+                    renderQuotes()
+                }
+            </div>
+        </>
     )
 }
 

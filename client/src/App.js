@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import './app.scss';
 import { Switch, Route, BrowserRouter, withRouter } from 'react-router-dom';
-// import { NativeRouter, BackButton } from 'react-router-native';
+//import { NativeRouter, BackButton } from 'react-router-native';
+import Search from './search/Search'
 import Template from './template/template';
 import StoryCheck from './storyCheck/storyCheck';
 import Testimony from './testimony/testimony.jsx';
@@ -44,6 +45,7 @@ function App() {
         <Route exact path='/login' component={LoginSignup} />
           <Route exact path='/signup' render={()=><LoginSignup isSignup={true}></LoginSignup>} />
         <Route exact path='/quotes' component={Quotes} />
+        <Route exact path='/search' component={Search}/>
         <Route path='*' component={() => '404 Not Found'} />
       </Switch>
       {/* <Footer></Footer> */}
