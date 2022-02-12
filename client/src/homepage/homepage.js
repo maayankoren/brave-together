@@ -81,48 +81,67 @@ function Homepage() {
     }
 
     return (
-        <homepage>
+        <div className='homepage-wrapper'>
             <div className='homepage-container' dir="rtl">
                 <table>
                     <tr>
+                        <td style={{ 'width': '50%' }}>
+                            <div className='header' style={{ "margin-bottom": "10px" }}>
+                                <br />אנו מזמינים אותך ליצור<br />
+                                <b>#העצמה_אחת_ביום</b>
+                            </div>
+                            <div className='sub-header'>
+                                בהשראת סיפורים של גיבורים וגיבורות מהשואה.<br />
+                                המוטו שלנו הוא "לעשות ולא לשכוח". <br />
+                            </div></td>
                         <td></td>
-                        <td>
-                <div className='header' style={{ "margin-bottom": "10px" }}>
-                    <br />אנו מזמינים אותך ליצור<br />
-                    <b>#העצמה_אחת_ביום</b>
-                <div className='sub-header'>
-                    בהשראת סיפורים של גיבורים וגיבורות מהשואה.<br />
-                    המוטו שלנו הוא "לעשות ולא לשכוח". <br />
-                </div>
-                </div>
-
-                        </td>
                     </tr>
                     <tr>
                         <td>
-                <div className='content'>
-                    <ul>
-                        <li><b>לקרוא</b> סיפורי גבורה, העצמה אישית וסיפורים מעוררי השראה. </li>
-                        <li><b>לבחור</b> סיפור אותו תרצו לשתף.
-                            בין אם זה ביום הזיכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה.</li>
-                        <li><b>לעצב</b> אותו באתר <b>ולשתף</b> היכן שתרצו.</li>
-                    </ul>
-                </div>
-
+                        </td>
+                        <td>
+                            <div className='content'>
+                                <ul>
+                                    <li><b>לקרוא</b> סיפורי גבורה, העצמה אישית וסיפורים מעוררי השראה. </li>
+                                    <li><b>לבחור</b> סיפור אותו תרצו לשתף.
+                                        בין אם זה ביום הזיכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה.</li>
+                                    <li><b>לעצב</b> אותו באתר <b>ולשתף</b> היכן שתרצו.</li>
+                                </ul>
+                                <button onClick={onStartButtonClick}>התחל</button>
+                            </div>
                         </td>
                     </tr>
                 </table>
-                <br />
+
+                <div className='phoneComponent'>
+                    <img src='Logo transparent.png' alt='Logo' className='logo' />
+                    <div className='header'>
+                        <br />אנו מזמינים אותך ליצור<br />
+                        <b>#העצמה_אחת_ביום</b>
+                    </div>
+                    <div className='sub-header'>
+                        בהשראת סיפורים של גיבורים וגיבורות מהשואה.<br />
+                        המוטו שלנו הוא "לעשות ולא לשכוח". <br />
+                    </div>
+                    <div className='content'>
+                        <ul>
+                            <li><b>לקרוא</b> סיפורי גבורה, העצמה אישית וסיפורים מעוררי השראה. </li>
+                            <li><b>לבחור</b> סיפור אותו תרצו לשתף.
+                                בין אם זה ביום הזיכרון, בחגי ישראל, בימים המיוחדים לכם או פשוט בשגרה.</li>
+                            <li><b>לעצב</b> אותו באתר <b>ולשתף</b> היכן שתרצו.</li>
+                        </ul>
+                        <button onClick={onStartButtonClick}>התחל</button>
+                    </div>
+                </div>
                 <div className='closing-text'>
                     לעוד מידע על העמותה וכלל הפרויקטים שלנו מוזמנים לאתר
                     <a href='https://brave-together.com/'>
                         "מצעד הגבורה"
                     </a>
                     <br /><br />
-                    <button onClick={onStartButtonClick}>בואו נתחיל</button>
                 </div>
             </div >
-        </homepage>
+        </div>
     );
 }
 
