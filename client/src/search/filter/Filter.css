@@ -71,10 +71,53 @@
     transform: scale(1.2);
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:1007px) {
 
     .filters-button{
         height: 1.5rem;
         width: 1.5rem;
+    }
+}
+
+@media screen and (max-width:640px) {
+    .filters-button{
+        height: 1.6rem;
+        width: 1.6rem;
+    }
+    .filters{
+        position:absolute;
+        margin-top: 2rem;
+        width: 70%;
+        height: fit-content;
+        max-height: 70vh;
+        background: #fff;
+        border-radius: 4px;
+        padding: 10px;
+        border: 1px solid #999;
+        overflow:hidden;
+    }
+    .filter{
+        margin: 3px ;
+        border: 1px solid black;
+        background-color: #C4C4C4;
+        border-radius: 3px;
+        cursor: pointer;
+        padding:0 8px; 
+    }
+    .filter-selected{
+        margin: 3px ;
+        border: 1px solid black;
+        background-color: #3F3F3F;
+        color: white;
+        border-radius: 3px;
+        cursor: pointer;
+        padding:0 8px;
+    
+    }
+    .filter-text{
+        font-size: 10px;
+    }
+    .heading-3{
+        font-size: 16px;
     }
 }

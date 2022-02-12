@@ -46,7 +46,7 @@ const Filter = ({data,setFilteredData}) => {
         return filters.map((filter)=>{
             return(
                 <div className={filter.isSelected ? 'filter-selected' : 'filter'} onClick={()=>selectFilter(filter)}>
-                    {filter.name}
+                    <span className='filter-text'>{filter.name}</span>
                 </div>
             )
         })
@@ -129,7 +129,7 @@ const Filter = ({data,setFilteredData}) => {
                  <div className='filters'>
                      <div className='filters-line'>
                         <div  className='filters-button' onClick={handleSelectedFilters}>✓</div>
-                        <h3>סינון</h3>
+                        <h3 className='heading-3'>סינון</h3>
                         <div className='filters-button' onClick={handleCloseFilters}>✕</div>
                      </div>
                      <div className='filters-container'>
