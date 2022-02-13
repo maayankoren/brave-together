@@ -1,6 +1,6 @@
 .homepage-wrapper {
-    position     : relative;
-    background   : linear-gradient(90.14deg, rgba(65, 65, 65, 0.76) 37.72%, rgba(255, 255, 255, 0.5) 65.05%);
+    position  : relative;
+    background: linear-gradient(90.14deg, rgba(65, 65, 65, 0.76) 37.72%, rgba(255, 255, 255, 0.5) 65.05%);
 }
 
 .homepage-wrapper::before {
@@ -84,6 +84,9 @@
 
     @media all and (max-width: 600px),
     (max-height: 550px) {
+
+        position        : absolute;
+        background-color: white;
 
         table {
             display: none;
