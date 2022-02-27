@@ -47,7 +47,7 @@ const Testimony = ({ match }) => {
         }
     }
 
-    const onChooseText = (ev) => {
+    const onQuoteText = () => {
         if (isChooseText && selectedText.current) {
             const { storyId } = match.params;
             history.push({
@@ -55,12 +55,18 @@ const Testimony = ({ match }) => {
                 state: { txt: selectedText.current, storyId }
             })
         }
-        setIsChooseText(!isChooseText);
     }
 
-    const chooseText = () => {
-        if (!isChooseText) return
-        selectedText.current = window.getSelection().toString()
+    const chooseText = (ev) => {
+        ev.stopPropagation()
+        const txt = window.getSelection().toString()
+        if (txt) {
+            selectedText.current = txt
+            setIsChooseText(true)
+        } else {
+            selectedText.current = null
+            setIsChooseText(false)
+        }
     }
 
     const onToggleModal = () => {
@@ -69,9 +75,13 @@ const Testimony = ({ match }) => {
 
     if (!story) return <div>Loading..</div>
     return (
-        <section className="testimony-container">
+        <section className="testimony-container" onClick={chooseText}>
 
-            <button className="prev-quotes-btn">שיתופים קודמים</button>
+            <div className="btns-container">
+                <button className="prev-quotes-btn ">מאגר סיפורים</button>
+                <button className="prev-quotes-btn">ציטוטים</button>
+                <button className="prev-quotes-btn chosen">קריאת סיפור</button>
+            </div>
 
             <div className="testimony-content">
 
@@ -99,14 +109,13 @@ const Testimony = ({ match }) => {
             <div className="testimony-quotes" >
                 <div className="chosen-quotes" onClick={onToggleModal}>ציטוטים נבחרים</div>
                 <div className={isChooseText ? 'choose-text chosen' : 'choose-text'}
-                    onClick={onChooseText}>
+                    onClick={onQuoteText}>
                     {!isChooseText && <p>בחר טקסט מעצים על מנת לשתף ציטוט</p>}
                     {isChooseText && <p>צטט</p>}
-                    <div className="add-btn"><img src={addBtn} alt="choose-text" /></div>
                 </div>
             </div>
 
-            {isModalOpen && <SelectedQuotes quotes={story.quotes} onToggleModal={onToggleModal} onChooseText={onChooseText} />}
+            {isModalOpen && <SelectedQuotes quotes={story.quotes} onToggleModal={onToggleModal} onChooseText={onQuoteText} />}
 
         </section>
     )

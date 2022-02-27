@@ -47,7 +47,6 @@ export const TemplateEdit = () => {
         removeListeners(canvasRef.current)
         addListeners(canvasRef.current)
         drawTemplate()
-        console.log('template b4 drawing', template);
         storageService.saveTempToStorage(template)
 
         return () => {
@@ -86,7 +85,8 @@ export const TemplateEdit = () => {
     }
 
     const shouldRecomputeTxtWidth = () => {
-        if (!prevTemplate || dragRef.current.isDrag) return false
+        if (dragRef.current.isDrag) return false
+        if (!prevTemplate) return true
         if (template.txt.fontColor !== prevTemplate.txt.fontColor) return false
         return JSON.stringify(template.txt) !== JSON.stringify(prevTemplate.txt)
     }
@@ -101,12 +101,13 @@ export const TemplateEdit = () => {
     }
 
     const removeListeners = (canvas) => {
+        window.removeEventListener('resize', resizeCanvas)
+        document.querySelector('body').style.overflow = 'scroll'
         if (!canvas) return
         const funcs = { onDown, onMove, onUp }
         canvasService.removeMouseListeners(canvas, funcs)
         canvasService.removeTouchListeners(canvas, funcs)
-        window.removeEventListener('resize', resizeCanvas)
-        document.querySelector('body').style.overflow = 'scroll'
+
     }
 
     const onDown = (ev) => {

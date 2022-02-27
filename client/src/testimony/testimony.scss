@@ -5,15 +5,24 @@
   flex-direction: column;
   gap: 1rem;
   text-align: right;
-
+  .btns-container {
+    display: flex;
+    justify-content: space-between;
+  }
   .prev-quotes-btn {
-    padding: 10px;
-    background: #cd531f;
+    padding: 10px 15px;
+    font-weight: 500;
+    background: transparent;
+    &.chosen {
+      background: #FF9466;
+    }
     color: #000000;
     border: 0;
     border-radius: 4px;
     align-self: flex-end;
   }
+
+  
 
   .testimony-hero-container {
     display: flex;
@@ -83,6 +92,7 @@
   .testimony-details {
     padding: 0 6px;
     line-height: 1.75rem;
+    min-height: calc(100vh - 200px);
   }
 
   .testimony-quotes {
@@ -98,7 +108,7 @@
     justify-content: center;
     .chosen-quotes {
       width: 90%;
-      background: #105e7d;
+      background: #525252;
       color: #ffffff;
       line-height: 28px;
       font-weight: 500;

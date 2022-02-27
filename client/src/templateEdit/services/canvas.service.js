@@ -28,13 +28,13 @@ const QUOTE = "\""
 //GETTERS
 
 function getTemplate(txt) {
-    const template = storageService.getTempFromStorage() || getEmptyTemplate();
-    template.txt.content = txt
+    let template = storageService.getTempFromStorage();
+    if (!template || template?.txt?.content !== txt) template = getEmptyTemplate(txt)
     storageService.saveTempToStorage(template)
     return template
 }
 
-function getEmptyTemplate() {
+function getEmptyTemplate(content) {
     return {
         background: { type: 'color', attr: '#ffffff' },//'images/111-02.svg',
         imgs: [],
@@ -43,7 +43,7 @@ function getEmptyTemplate() {
             pos: { x: 0, y: 0 }
         },
         txt: {
-            content: '',
+            content,
             fontSize: 16,
             fontFamily: 'Arial, Helvetica, sans-serif',
             fontColor: '#000000',
@@ -55,7 +55,7 @@ function getEmptyTemplate() {
 function getEvPos(ev) {
     let pos = {
         x: ev.offsetX,
-        y: ev.offsetY
+        y: ev.offsetY + 70
     }
     if (gTouchEvs.includes(ev.type)) {
         ev.preventDefault()
