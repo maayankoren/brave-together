@@ -10,6 +10,7 @@ import pen from '../assets/images/pen.png'
 import calendar from '../assets/images/calendar.png'
 import SelectedQuotes from '../selectedQuotes/SelectedQuotes';
 import axios from 'axios'
+import { useHistory } from 'react-router-dom';
 
 const Testimony = ({ match }) => {
 
@@ -17,11 +18,16 @@ const Testimony = ({ match }) => {
     const [isChooseText, setIsChooseText] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const selectedText = useRef(null)
+    const history = useHistory()
 
     useEffect(() => {
-        const { storyId } = match.params; 
+        const { storyId } = match.params;
         const story = loadStoryById(storyId)
         setStory(story)
+
+        return () => {
+            selectedText.current = null
+        }
     }, [match.params.storyId])
 
     const loadStoryById = async (storyId) => {
@@ -32,11 +38,9 @@ const Testimony = ({ match }) => {
             }
         };
         try {
-            console.log('hi', storyId);
-            const {data} = await axios.get("http://127.0.0.1:5000/api/story_body",
+            const { data } = await axios.get("http://127.0.0.1:5000/api/story_body",
                 { params: { id: storyId } },
                 axiosConfig)
-            console.log('story from server', data.story);
             setStory(data.story)
         } catch (err) {
             console.log(err)
@@ -45,9 +49,11 @@ const Testimony = ({ match }) => {
 
     const onChooseText = (ev) => {
         if (isChooseText && selectedText.current) {
-            console.log('after selection', selectedText.current)
-            //go to edit quote 
-            // selectedText.current = null; --- after sending data
+            const { storyId } = match.params;
+            history.push({
+                pathname: '/templateEdit',
+                state: { txt: selectedText.current, storyId }
+            })
         }
         setIsChooseText(!isChooseText);
     }

@@ -8,7 +8,7 @@ import StoryCheck from './storyCheck/storyCheck';
 import Testimony from './testimony/testimony';
 import TextEdit from './text/text';
 import StoryUpload from './storyUpload/StoryUpload';
-import TemplateEdit from './templateEdit/template-edit';
+import {TemplateEdit} from './templateEdit/TemplateEdit';
 import Share from './share/share';
 import About from './about/about';
 import Footer from './footer/footer'
@@ -16,7 +16,7 @@ import Homepage from './homepage/homepage';
 
 //import BackButton from './backButton/backButton';
 import ThankYouForComing from './thankYouForComing/thankYouForComing';
-import Header from './header/header';
+import {Header} from './header/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';

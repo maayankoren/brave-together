@@ -7,6 +7,7 @@ import vectorTop2 from '../assets/images/vectortop2.png'
 import vectorBottom from '../assets/images/vectorbottom.png'
 import addBtn from '../assets/images/add-btn.png'
 import { mock } from './mock2';
+import { useHistory } from 'react-router-dom';
 
 
 // function loadStoryById(storyId) { //TEMP~~~
@@ -18,7 +19,8 @@ const Testimony = ({ match }) => {
     const [story, setStory] = useState(null)
     const [isChooseText, setIsChooseText] = useState(false)
     const selectedText = useRef()
-    
+    const history = useHistory()
+
     useEffect(() => {
         const { storyId } = match.params; // get from params
         // const storyId = '61994cce5c6bda891a141382';
@@ -34,17 +36,21 @@ const Testimony = ({ match }) => {
         if (ev.type === 'touchstart') {
             console.log('please select text');
         }
-        if(window.getSelection) {
+        if (window.getSelection) {
             selectedText.current = window.getSelection().toString()
         } else {
-            
+
         }
     }
 
     const onChooseText = (ev) => {
         if (isChooseText) {
-            console.log(selectedText.current)
+            console.log('111', selectedText.current)
             //go to edit quote 
+            history.push({
+                path: '/templateEdit',
+                state: { txt: selectedText.current }
+            })
             console.log(window.getSelection().toString())
         }
         setIsChooseText(!isChooseText);
