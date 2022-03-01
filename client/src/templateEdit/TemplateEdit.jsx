@@ -79,7 +79,8 @@ export const TemplateEdit = () => {
         (background.type === 'color') && canvasService.drawBgcColor(canvas, ctx, background.attr);
         (background.type === 'img') && await canvasService.drawBgcImg(canvas, ctx, background.attr);
 
-        imgs.length && await canvasService.drawImg(ctx, imgs)
+        frame && await canvasService.drawFrame(canvas, ctx, frame)
+        imgs.length && await canvasService.drawImgs(ctx, imgs)
 
         txt && canvasService.drawText(canvas, ctx, shouldRecomputeTxtWidth(), txt);
     }
@@ -141,7 +142,8 @@ export const TemplateEdit = () => {
                     drawings={constants.drawings} patterns={constants.patterns} options={option.subTypes}
                     setTemplate={setTemplate} template={template} />
             case 'frame':
-                return <FrameOptions frames={constants.frames} />
+                return <FrameOptions frames={constants.frames} template={template}
+                    setTemplate={setTemplate} />
             case 'img':
                 return <ImgOptions natureImgs={constants.natureImgs} stillImgs={constants.stillImgs}
                     options={option.subTypes} setTemplate={setTemplate} template={template} />
@@ -153,7 +155,6 @@ export const TemplateEdit = () => {
                 return <></>
         }
     }
-
 
     return (
         <section className="template-edit-container">

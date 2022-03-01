@@ -8,7 +8,6 @@ export const ImgOptions = ({ stillImgs, natureImgs, options, setTemplate, templa
 
     const setImg = (src) => {
         const imgFromTemp = template.imgs.find(img => img.src === src)
-        console.log(src, imgFromTemp);
         if (!imgFromTemp) addImg(src)
         else removeImg(imgFromTemp)
 

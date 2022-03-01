@@ -3,7 +3,6 @@
 }
 .template-edit-container {
   direction: rtl;
-
   height: calc(100vh - 56px);
   width: 100%;
   display: flex;
@@ -126,7 +125,7 @@
         align-items: center;
         &.frames-container {
           position: relative;
-          top: 10px;
+          top: 11.5px;
         }
         .choose-container {
           width: 100%;
@@ -169,14 +168,15 @@
               color: lightgray;
             }
             &.frame-option {
-              height: 50px;
+              height: 40px;
               background-color: transparent;
               img {
                 mix-blend-mode: multiply;
+                object-fit: contain;
               }
             }
             &.no-frame-option {
-              height: 50px;
+              height: 40px;
               display: grid;
               place-content: center;
               font-weight: 500;

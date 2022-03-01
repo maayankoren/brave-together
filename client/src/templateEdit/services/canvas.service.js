@@ -1,7 +1,6 @@
 import { storageService } from './storageService'
 export const canvasService = {
     getTemplate,
-    drawContent: drawContentAndGetWidth,
     drawText,
     drawBgcColor,
     drawBgcImg,
@@ -9,13 +8,13 @@ export const canvasService = {
     isElClicked,
     setElPos,
     getTxtPos,
-    reDrawContent,
     addMouseListeners,
     addTouchListeners,
     removeMouseListeners,
     removeTouchListeners,
-    drawImg: drawImgs,
-    getImg
+    drawImgs,
+    getImg,
+    drawFrame
 }
 
 // GLOBALS
@@ -38,10 +37,7 @@ function getEmptyTemplate(content) {
     return {
         background: { type: 'color', attr: '#ffffff' },//'images/111-02.svg',
         imgs: [],
-        frame: {
-            src: '',
-            pos: { x: 0, y: 0 }
-        },
+        frame: '',
         txt: {
             content,
             fontSize: 16,
@@ -88,19 +84,19 @@ function getImg(src) {
 function isElClicked(clickedPos) {
     let elClicked = null;
     if (gLines.length) {
-        const line = getLineClicked(gLines, clickedPos)
+        const line = _getLineClicked(gLines, clickedPos)
         if (line) elClicked = { type: 'txt', ...line }
     }
 
     if (gImgs.length) {
-        const img = getImgClicked(gImgs, clickedPos)
+        const img = _getImgClicked(gImgs, clickedPos)
         if (img) elClicked = { type: 'img', ...img }
     }
 
     return elClicked
 }
 
-function getLineClicked(lines, clickedPos) {
+function _getLineClicked(lines, clickedPos) {
     return lines.find((line) => {
         const lineArea = {
             x: line.x - line.width,
@@ -111,7 +107,7 @@ function getLineClicked(lines, clickedPos) {
     })
 }
 
-function getImgClicked(imgs, clickedPos) {
+function _getImgClicked(imgs, clickedPos) {
     const imgsCopy = imgs.slice().reverse()
     return imgsCopy.find((img) => {
         const { pos, size } = img
@@ -132,13 +128,13 @@ function drawText(canvas, ctx, isRecomputeTxtWidth, { content, fontSize, fontFam
     ctx.strokeStyle = fontColor;
     ctx.fillStyle = fontColor;
     if (!gLines.length || isRecomputeTxtWidth) {
-        drawContentAndGetWidth(content, pos, ctx, canvas)
+        _drawContentAndGetWidth(content, pos, ctx, canvas)
     } else {
-        reDrawContent(ctx)
+        _reDrawContent(ctx)
     }
 }
 
-function drawContentAndGetWidth(txt, { x, y }, ctx, canvas, lineHeight = 25) {
+function _drawContentAndGetWidth(txt, { x, y }, ctx, canvas, lineHeight = 25) {
     const words = txt.split(' ')
     const maxWidth = canvas.width - 100
     gLines = []
@@ -163,7 +159,7 @@ function drawContentAndGetWidth(txt, { x, y }, ctx, canvas, lineHeight = 25) {
     ctx.fillText(line, x, y);
 }
 
-function reDrawContent(ctx) {
+function _reDrawContent(ctx) {
     gLines.forEach(line => {
         ctx.fillText(line.txt, line.x, line.y);
     })
@@ -193,6 +189,12 @@ async function drawImgs(ctx, imgs) {
         ctx.drawImage(imgToDraw, pos.x, pos.y, size, size)
     })
     gImgs = imgs
+}
+
+async function drawFrame(canvas, ctx, src) {
+    const imgToDraw = new Image()
+    imgToDraw.src = require('../' + src).default;
+    ctx.drawImage(imgToDraw, -5, 0, canvas.width + 5, canvas.height)
 }
 
 //SETTERS
