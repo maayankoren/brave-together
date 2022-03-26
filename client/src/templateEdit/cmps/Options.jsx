@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { options } from '../imgs/consts'
 import bgcImg from '../imgs/utils/bgc.png'
 import bgc1Img from '../imgs/utils/bgc1.png'
 import imgImg from '../imgs/utils/img.png'
@@ -7,7 +8,9 @@ import img1Img from '../imgs/utils/img1.png'
 import frameImg from '../imgs/utils/frame.png'
 import textImg from '../imgs/utils/text.png'
 
-export const Options = ({ setOption, chosenOption, options }) => {
+
+
+export const Options = ({ setOption, chosenOption }) => {
 
     const getChosenOption = (type) => {
         return options.find(option => option.type === type)

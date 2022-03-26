@@ -28,6 +28,7 @@ const QUOTE = "\""
 
 function getTemplate(txt) {
     let template = storageService.getTempFromStorage();
+    console.log('template', template);
     if (!template || template?.txt?.content !== txt) template = getEmptyTemplate(txt)
     storageService.saveTempToStorage(template)
     return template

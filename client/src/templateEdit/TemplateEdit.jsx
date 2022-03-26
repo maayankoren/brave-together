@@ -3,13 +3,14 @@ import { useLocation } from 'react-router-dom'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 import { Options } from './cmps/Options.jsx'
+import { options } from './imgs/consts'
 import { BackgroundOptions } from './cmps/BackgroundOptions.jsx'
 import { FrameOptions } from './cmps/FrameOptions.jsx'
 import { ImgOptions } from './cmps/ImgOptions.jsx'
 import { TextOptions } from './cmps/TextOptions.jsx'
-import { constants } from './imgs/consts.js';
 import { usePrevious } from './hooks/usePrevious'
 import { SubOptions } from './cmps/SubOptions.jsx'
+import { Share } from '../share/share'
 
 import backImg from './imgs/utils/back.png'
 import downloadImg from './imgs/utils/download.png'
@@ -21,7 +22,8 @@ import './template-edit2.scss'
 
 export const TemplateEdit = () => {
 
-    const [option, setOption] = useState(constants.options[0])
+    const [isShareModalOpen, setIsShareModal] = useState(false)
+    const [option, setOption] = useState(options[0])
     const [template, setTemplate] = useState(null)
     const prevTemplate = usePrevious(template)
 
@@ -30,11 +32,13 @@ export const TemplateEdit = () => {
 
     const canvasRef = useRef()
     const ctxRef = useRef()
-    const dragRef = useRef({ isDrag: false, startPos: null })
+    const dragRef = useRef({ isDrag: false, startPos: null, elClicked: null })
 
     useEffect(() => {
         setCanvas()
-        setTemplate(canvasService.getTemplate(location.state.txt))
+        const txt = location.state?.txt
+        if(!txt) history.push('/')
+        setTemplate(canvasService.getTemplate(txt))
 
         return () => {
             canvasRef.current = null
@@ -70,9 +74,9 @@ export const TemplateEdit = () => {
     const drawTemplate = async () => {
 
         const { txt, background, frame, imgs } = template
-        const ctx = ctxRef.current
-        const canvas = canvasRef.current
         const { isDrag } = dragRef.current
+        const canvas = canvasRef.current
+        const ctx = ctxRef.current
 
         isDrag && ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -80,9 +84,14 @@ export const TemplateEdit = () => {
         (background.type === 'img') && await canvasService.drawBgcImg(canvas, ctx, background.attr);
 
         frame && await canvasService.drawFrame(canvas, ctx, frame)
+
         imgs.length && await canvasService.drawImgs(ctx, imgs)
 
         txt && canvasService.drawText(canvas, ctx, shouldRecomputeTxtWidth(), txt);
+    }
+
+    const onToggleShareModal = () => {
+        setIsShareModal(!isShareModalOpen)
     }
 
     const shouldRecomputeTxtWidth = () => {
@@ -136,21 +145,20 @@ export const TemplateEdit = () => {
     }
 
     const DynamicOptions = () => {
+        const props = {
+            options: option.subTypes || null,
+            template,
+            setTemplate
+        }
         switch (option.type) {
             case 'background':
-                return <BackgroundOptions photos={constants.photos} colors={constants.colors}
-                    drawings={constants.drawings} patterns={constants.patterns} options={option.subTypes}
-                    setTemplate={setTemplate} template={template} />
+                return <BackgroundOptions {...props} />
             case 'frame':
-                return <FrameOptions frames={constants.frames} template={template}
-                    setTemplate={setTemplate} />
+                return <FrameOptions {...props} />
             case 'img':
-                return <ImgOptions natureImgs={constants.natureImgs} stillImgs={constants.stillImgs}
-                    options={option.subTypes} setTemplate={setTemplate} template={template} />
+                return <ImgOptions {...props} />
             case 'text':
-                return <TextOptions fonts={constants.fonts} colors={constants.colors}
-                    options={option.subTypes} txtSizes={constants.txtSizes}
-                    setTemplate={setTemplate} template={template} />
+                return <TextOptions {...props} />
             default:
                 return <></>
         }
@@ -159,6 +167,7 @@ export const TemplateEdit = () => {
     return (
         <section className="template-edit-container">
 
+            <Share canvas={canvasRef.current} isOpen={isShareModalOpen} onClose={onToggleShareModal} />
             <div className="btns-container">
                 <button onClick={() => history.push(`/testimony/${location.state.storyId}`)}>
                     <div className="img-container">
@@ -181,14 +190,16 @@ export const TemplateEdit = () => {
 
             <div className="btns-container-2">
                 <button className="more-btn">לעיצובים נוספים</button>
-                <button className="share-btn">שתף</button>
+                <button className="share-btn" onClick={onToggleShareModal}>שתף</button>
             </div>
 
             <div className="tool-bar-container">
+
                 <SubOptions options={option.subTypes} setOption={setOption}>
                     <DynamicOptions />
                 </SubOptions>
-                <Options setOption={setOption} chosenOption={option} options={constants.options} />
+
+                <Options setOption={setOption} chosenOption={option} />
             </div>
         </section>
     )

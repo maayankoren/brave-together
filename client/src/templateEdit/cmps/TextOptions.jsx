@@ -1,8 +1,9 @@
 import React from 'react'
 import { canvasService } from '../services/canvas.service'
 import { ChosenSubOption } from './ChosenSubOption'
+import { colors, fonts, txtSizes } from '../imgs/consts'
 
-export const TextOptions = ({ colors, fonts, txtSizes, options, setTemplate, template }) => {
+export const TextOptions = ({ options, setTemplate, template }) => {
 
     const setFontStyle = (type, attr) => {
         const pos = canvasService.getTxtPos()

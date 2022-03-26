@@ -111,7 +111,7 @@ const options = [
     },
 ]
 
-export const constants = {
+export {
     colors,
     drawings,
     photos,

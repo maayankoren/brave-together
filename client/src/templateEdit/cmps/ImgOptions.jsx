@@ -1,10 +1,9 @@
 import React from 'react'
 import { canvasService } from '../services/canvas.service'
 import { ChosenSubOption } from './ChosenSubOption'
-import { SubOptions } from './SubOptions'
+import { stillImgs, natureImgs } from '../imgs/consts'
 
-
-export const ImgOptions = ({ stillImgs, natureImgs, options, setTemplate, template }) => {
+export const ImgOptions = ({ options, setTemplate, template }) => {
 
     const setImg = (src) => {
         const imgFromTemp = template.imgs.find(img => img.src === src)
