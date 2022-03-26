@@ -3,10 +3,6 @@
     text-align: right;
 
     #buttons {
-        display: inline;
-    }
-
-    #buttons ul {
         display   : inline;
         list-style: none;
         padding   : 0px;
@@ -22,7 +18,7 @@
         width: 172.33px;
         height: 28px;
         padding: 23px;
-        margin: 10px;
+        // margin: 10px;
         font-family: 'Rubik';
         font-style: normal;
         font-weight: 500;
@@ -30,11 +26,11 @@
         line-height: 28px;
     }
 
-    #color .Button:hover {
+    .singedOut .Button:hover {
         background-color: #8DA7B2;
     }
 
-    #colorSignedIn .Button:hover {
+    .signedIn .Button:hover {
         background-color: #FF9466;
     }
 
@@ -49,9 +45,12 @@
 
         #buttons li {
             display: table-cell;
+            padding: 10px;
         }
 
         #buttons .Button {
+            display: block;
+            text-align: center;
             width: 100%;
             border-radius: 6px;
         }

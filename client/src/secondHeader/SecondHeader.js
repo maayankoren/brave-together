@@ -57,17 +57,17 @@ function SecondHeader() {
 
     return (
         <div className="SecondHeader">
-            <ul id="buttons">
+            <ul id="buttons" className={isSignedIn ? "SignedIn" : "SignedOut"}>
                 {isSignedIn ?
                     data.secondHeader.linksSignedIn.map((link, index) =>
-                        <li id={isSignedIn ? "colorSignedIn" : "color"}>
+                        <li>
                             <Button className="Button" href={link.rout}>
                                 {link.diaplayName}
                             </Button>
                         </li>)
-                    : 
+                    :
                     data.secondHeader.links.map((link, index) =>
-                        <li id={isSignedIn ? "colorSignedIn" : "color"}>
+                        <li>
                             <Button className="Button" href={link.rout}>
                                 {link.diaplayName}
                             </Button>
