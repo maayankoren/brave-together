@@ -1,0 +1,34 @@
+.navbar{
+    background-color: #A7C6D3;
+}
+.navLink{
+    text-align: center;
+}
+.toggler,
+.toggler:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none;
+}
+button:hover{
+    outline: none;
+    background-color: inherit;
+}
+.brand{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.navLink:hover,
+.navLink:active{
+    padding-bottom: 0.25rem;
+    border-bottom: 4px solid #CD531F;
+}
+.userIcon{
+    height: 2rem;
+    width: auto;
+}
+.logoIcon{
+
+}

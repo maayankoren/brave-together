@@ -1,0 +1,14 @@
+[
+    {
+        "title":"Account",
+        "link":"/account"
+    },
+    {
+        "title":"Shopping Cart",
+        "link":"/cart"
+    },
+    {
+        "title":"Logout",
+        "link":"/logout"
+    }
+]

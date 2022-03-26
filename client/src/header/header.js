@@ -1,85 +1,69 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import "./header.scss";
+import React,{useState} from 'react'
+import classes from "./Header.module.css"
+import {Navbar,Container,Nav} from 'react-bootstrap'
+import links from './links.json'
+import icon from './icon.svg'
+import user from './user.svg'
+import miniLogo from './miniLogo.svg'
 
-class Header extends React.Component {
-  
-  constructor(props) {
-    super(props);
+const Header = () => {
+    const [isSmallScreen,setIsSmallScreen] = useState(window.innerWidth <= 992 ? true : false)
 
-    this.state = {
-      isSignedIn: false
+    const isAuthenticated = true; //need to figure out where do we get the user data from ? (context, localstorage , etc ...)
+    const userName = "יוסי"
+
+    const handleResize =()=>{
+        if(window.innerWidth <= 992){
+            setIsSmallScreen(true)
+        }
+        else{
+            setIsSmallScreen(false)
+        }
     }
-  }
 
-  componentDidMount() {
-    let token = localStorage.getItem('token');
-      
-    if(token) {
-      this.setState({ isSignedIn: true });
+    window.addEventListener('resize',handleResize)
+
+
+    const renderLinks = ()=>{
+        return links.map((link)=>{
+            return (
+                <React.Fragment>
+                    <Nav.Link className={classes.navLink} href={link.link}>{link.title}</Nav.Link>
+                </React.Fragment>
+            )
+        })
     }
 
-    else {
-      this.setState({ isSignedIn: false });
-    }
-  }
+  return (
+    <div>
+        <Navbar className={classes.navbar} expand="lg">
+            <Container fluid>
+                <Navbar.Brand className={classes.brand} href="#">
+                    <img className={classes.userIcon} src={user} alt="User"/>
+                </Navbar.Brand>
+                {isSmallScreen && 
+                    <Navbar.Brand className='m-auto'>
+                        <img src={miniLogo} alt="logo"/>
+                    </Navbar.Brand>
+                }
+                <Navbar.Toggle className={classes.toggler} aria-controls="navbarScroll" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav
+                    className="m-auto"
+                    style={{ padding:"1rem" }}
+                >
+                   {renderLinks()}
+                </Nav>
+                </Navbar.Collapse>
+                {!isSmallScreen &&
+                    <Navbar.Brand href="#">
+                      <img src={icon} className={classes.logoIcon} alt="Logo"/>
+                    </Navbar.Brand>
+                }
+            </Container>
+        </Navbar>
+    </div>
+  )
+}
 
-  render() {
-
-    return (
-      <div className="header-container">
-        <nav className="navbar navbar-expand-lg">
-          <ul>
-            <li className="nav-item">
-              <NavLink className="nav-link link-dark" to="/signup">
-                הירשם
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link link-dark" to="/login">
-                התחבר
-              </NavLink>
-            </li>
-            {/* <li>
-              <NavLink className="nav-link" to="/">
-                התנתק
-              </NavLink>
-            </li> */}
-            <li className="nav-item">
-              <NavLink className="nav-link link-dark" to="/">
-                בית
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link link-dark" to="/about">
-                אודות
-              </NavLink>
-            </li>
-            {/* <li className="nav-item">
-              <NavLink className="nav-link link-dark" to="/">
-                עיצוב ציטוט
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link link-dark" to="/">
-                הוספת סיפור
-              </NavLink>
-            </li> */}
-          </ul>
-          <ul>
-            <li className="nav-item">
-              <NavLink to="/">
-                <img
-                  src="https://brave-together.com/wp-content/uploads/2020/04/%D7%A2%D7%95%D7%AA%D7%A7-%D7%A9%D7%9C-Copy-of-%D7%9C%D7%95%D7%92%D7%95-%D7%97%D7%93%D7%A9-%D7%A8%D7%A7%D7%A2-%D7%A9%D7%A7%D7%95%D7%A3.png"
-                  alt="לוגו"
-                ></img>
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    );
-  }
-};
-
-export default Header;
+export default Header

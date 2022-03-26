@@ -18,12 +18,13 @@ import Homepage from './homepage/homepage';
 
 //import BackButton from './backButton/backButton';
 import ThankYouForComing from './thankYouForComing/thankYouForComing';
-import Header from './header/header';
+//import Header from './header/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
 import ProtectedRoute from './protectedRoute/ProtectedRoute';
 import Quotes from './quotes/Quotes';
+import Header from './header/Header'
 
 
 function App() {
