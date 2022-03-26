@@ -1,0 +1,60 @@
+.SecondHeader {
+
+    text-align: right;
+
+    #buttons {
+        display: inline;
+    }
+
+    #buttons ul {
+        display   : inline;
+        list-style: none;
+        padding   : 0px;
+    }
+
+    #buttons li {
+        display: inline;
+    }
+
+    #buttons .Button {
+        color        : black;
+        border-radius: 4px;
+        width: 172.33px;
+        height: 28px;
+        padding: 23px;
+        margin: 10px;
+        font-family: 'Rubik';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 28px;
+    }
+
+    #color .Button:hover {
+        background-color: #8DA7B2;
+    }
+
+    #colorSignedIn .Button:hover {
+        background-color: #FF9466;
+    }
+
+    @media all and (max-width: 600px), (max-height: 550px) {
+    
+        text-align: center;
+
+        #buttons {
+            display: table;
+            width: 100%
+        }
+
+        #buttons li {
+            display: table-cell;
+        }
+
+        #buttons .Button {
+            width: 100%;
+            border-radius: 6px;
+        }
+
+    }
+}
