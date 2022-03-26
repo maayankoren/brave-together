@@ -197,21 +197,21 @@ export default function LoginSignup({ isSignup }) {
                                 isSignup && <>
 
                                     <div className='name-container'>
-                                        <TextField required fullWidth className="first-name" id="firstName" label="שם פרטי" variant="outlined" margin="normal" onChange={handleChange('firstName')} />
-                                        <TextField required fullWidth id="lastName" label="שם משפחה" variant="outlined" margin="normal" onChange={handleChange('lastName')} />
+                                        <TextField required fullWidth label='' className="first-name" id="firstName" placeholder="שם פרטי" variant="outlined" margin="normal" onChange={handleChange('firstName')} />
+                                        <TextField required fullWidth label='' id="lastName" placeholder="שם משפחה" variant="outlined" margin="normal" onChange={handleChange('lastName')} />
                                     </div>
-                                        <TextField fullWidth id="phone" type="phone" label="פלאפון" variant="outlined" margin="normal" onChange={handleChange('phone')} />
+                                        <TextField fullWidth id="phone" type="phone" label='' placeholder="פלאפון" variant="outlined" margin="normal" onChange={handleChange('phone')} />
 
                                 </>
 
                             }
-                            <TextField required fullWidth id="email" label="אימייל" variant="outlined" margin="normal" onChange={handleChange('email')} />
+                            <TextField required fullWidth id="email" label='' placeholder="אימייל" variant="outlined" margin="normal" onChange={handleChange('email')} />
                             <span style={{
                                 fontWeight: 'bold',
                                 color: 'red',
                             }}>{values.emailError}</span>
                             <FormControl fullWidth variant="outlined" margin="normal">
-                                <InputLabel required htmlFor="outlined-adornment-password">סיסמה</InputLabel>
+                                {/* <InputLabel required htmlFor="outlined-adornment-password">סיסמה</InputLabel> */}
                                 <OutlinedInput
                                     id="outlined-adornment-password"
                                     type={values.showPassword ? 'text' : 'password'}
@@ -229,7 +229,8 @@ export default function LoginSignup({ isSignup }) {
                                             </IconButton>
                                         </InputAdornment>
                                     }
-                                    label="סיסמה"
+                                    label=""
+                                    placeholder='סיסמא'
                                 />
                             </FormControl>
 
