@@ -27,9 +27,7 @@ const Header = () => {
     const renderLinks = ()=>{
         return links.map((link)=>{
             return (
-                <React.Fragment>
-                    <Nav.Link className={classes.navLink} href={link.link}>{link.title}</Nav.Link>
-                </React.Fragment>
+                <Nav.Link className={classes.navLink} href={link.link}>{link.title}</Nav.Link>
             )
         })
     }
@@ -38,8 +36,9 @@ const Header = () => {
     <div>
         <Navbar className={classes.navbar} expand="lg">
             <Container fluid>
-                <Navbar.Brand className={classes.brand} href="#">
+                <Navbar.Brand className={classes.brand}>
                     <img className={classes.userIcon} src={user} alt="User"/>
+                    <h6 className={classes.helloText}>{isAuthenticated ? `שלום ${userName}` : "שלום אורח"}</h6>
                 </Navbar.Brand>
                 {isSmallScreen && 
                     <Navbar.Brand className='m-auto'>
@@ -56,7 +55,7 @@ const Header = () => {
                 </Nav>
                 </Navbar.Collapse>
                 {!isSmallScreen &&
-                    <Navbar.Brand href="#">
+                    <Navbar.Brand >
                       <img src={icon} className={classes.logoIcon} alt="Logo"/>
                     </Navbar.Brand>
                 }
