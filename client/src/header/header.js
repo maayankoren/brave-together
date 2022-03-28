@@ -9,7 +9,7 @@ import miniLogo from './miniLogo.svg'
 const Header = () => {
     const [isSmallScreen,setIsSmallScreen] = useState(window.innerWidth <= 992 ? true : false)
 
-    const isAuthenticated = true; //need to figure out where do we get the user data from ? (context, localstorage , etc ...)
+    const isAuthenticated = false; //need to figure out where do we get the user data from ? (context, localstorage , etc ...)
     const userName = "יוסי"
 
     const handleResize =()=>{
@@ -42,11 +42,11 @@ const Header = () => {
                 </Navbar.Brand>
                 {isSmallScreen && 
                     <Navbar.Brand className='m-auto'>
-                        <img src={miniLogo} alt="logo"/>
+                        <img src={miniLogo} className={classes.miniLogoIcon} alt="logo"/>
                     </Navbar.Brand>
                 }
                 <Navbar.Toggle className={classes.toggler} aria-controls="navbarScroll" />
-                <Navbar.Collapse id="responsive-navbar-nav">
+                <Navbar.Collapse className={classes.navbarCollapse} id="responsive-navbar-nav">
                 <Nav
                     className="m-auto"
                     style={{ padding:"1rem" }}
