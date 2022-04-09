@@ -1,7 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Submit, Input, DivForm, Input2, Label2, Header, Label, LogoImg, Body } from './Design/styledComponents';
 import { useHistory, BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-// import logo from '../assets/images/Logo.jpg';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -179,35 +177,8 @@ export default function LoginSignup({ isSignup }) {
 
     return (
         <div className='login'>
-            <div className="pcComponent">
-                <DivForm>
-                    <LogoImg src="https://brave-together.com/wp-content/uploads/2021/05/%D7%9C%D7%95%D7%92%D7%95-%D7%A8%D7%99%D7%91%D7%95%D7%A2%D7%99-%D7%A9%D7%A7%D7%95%D7%A3-300x300.png" width="128" height="128"></LogoImg>
-                    <Header>התחברות</Header>
-                    <form>
-                        <Label htmlFor="emailBox">כתובת אימייל </Label>
-                        <Input id="emailBox" type="email" name="email" value={values.email} onChange={handleChange('email')} required style={{ marginRight: "auto", marginLeft: "auto" }}></Input>
-                        <span style={{
-                            fontWeight: 'bold',
-                            color: 'red',
-                        }}>{values.emailError}</span>
-                        <Label htmlFor="passwordBox">סיסמא </Label>
-                        <Input id="passwordBox"
-                            type="password"
-                            name="password"
-                            value={values.password}
-                            required
-                            onChange={handleChange('password')}></Input>
-                        <br></br>
-                        <Submit type="submit" value="הרשמה"></Submit>
-                    </form>
-                    <div style={{ height: "50px", color: "white" }}>
-                        <Link to="/">פתיחת חשבון חדש</Link>
-                    </div>
-                    <br></br>
-                </DivForm>
-            </div>
+            <div className='login-container'>
 
-            <div className="phoneComponent">
                 <ThemeProvider theme={theme}>
                     <Box
                         sx={{
@@ -220,7 +191,6 @@ export default function LoginSignup({ isSignup }) {
                         }}
                         dir="rtl"
                     >
-
                         <form>
                             {
                                 isSignup ? <>
@@ -236,7 +206,6 @@ export default function LoginSignup({ isSignup }) {
                                         <img src={brand} />
                                     </div>
                             }
-
                             {/* <img src="/logo1.png" alt="logo" width="220px" height="90px" /> */}
                             {
                                 isSignup && <>
@@ -291,13 +260,7 @@ export default function LoginSignup({ isSignup }) {
                             <br />או באמצעות
                             <hr size="5" color="#000000" width="90px" noshade style={{ marginTop: "29px" }} />
                         </FormGroup>
-                        <div>
-
-
-
-
-
-
+                        <div className='google-login-container'>
                             <GoogleLogin
                                 className='google-login'
                                 render={renderProps => (
@@ -310,9 +273,6 @@ export default function LoginSignup({ isSignup }) {
                                 cookiePolicy={'single_host_origin'}
 
                             />
-
-
-
                         </div>
                         {
                             !isSignup && <Button variant="contained" color="primary" onClick={handleMoveBtn} className="button">הירשם</Button>
@@ -321,15 +281,9 @@ export default function LoginSignup({ isSignup }) {
                         <Box sx={{ height: 50, padding: 1.5 }}>
                             <NavLink to={"/"} style={{ fontSize: "17px", color: "black", textDecoration: "none" }}>דלג לבינתיים</NavLink>
                             {/* </div> */}
-
                         </Box>
                     </Box>
                 </ThemeProvider>
-
-
-
-
-
             </div>
         </div>
     );

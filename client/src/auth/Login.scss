@@ -1,69 +1,64 @@
-
-.head{
-    h2{
-        font-size: 22px;
+.login {
+    background-color: white;
+    .login-container {
+        min-height: 90vh;
     }
-    img{
-        width: 182px;
-        height: 58px;
-        margin-bottom: 30px;
-    }
-    section{
-        margin-bottom: 30px;
-    }
-}
-
-.google-login {
-    height: 3rem;
-    border: none;
-    box-shadow: none !important;
-    svg {
-    }
-}
-
-.login .name-container {
-    display: flex;
-}
-
-.login .first-name {
-    margin-left: 20px !important;
-}
-
-.login .MuiBox-root .css-bk9fzy {
-    margin-bottom: 20px;
-}
-
-.login label {
-    width: 100%;
-    display: flex;
-}
-
-.login .pcComponent Input,
-.login .pcComponent Label {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-.login .phoneComponent {
-    display: none;
-    font-size: 14px;
-}
-
-.login .phoneComponent .button {
-    margin-top: 10px;
-    width: 100%;
-    height: 50px;
-    font-size: 23px;
-    color: white;
-}
-
-@media all and (max-width: 600px), (max-height: 550px) {
-    .login .pcComponent {
-        display: none;
+    .head {
+        h2 {
+            font-size: 22px;
+        }
+        img {
+            width: 182px;
+            height: 58px;
+            margin-bottom: 30px;
+        }
+        section {
+            margin-bottom: 30px;
+        }
     }
 
-    .login .phoneComponent {
-        display: block;
+    .google-login {
+        height: 3rem;
+        border: none;
+        box-shadow: none !important;
+        cursor: pointer !important;
+    }
+    .google-login-container {
+        cursor: pointer !important;
+    }
+
+    & .name-container {
+        display: flex;
+    }
+
+    & .first-name {
+        margin-left: 20px !important;
+    }
+
+    & .MuiBox-root .css-bk9fzy {
+        margin-bottom: 20px;
+    }
+
+    & label {
+        width: 100%;
+        display: flex;
+    }
+
+    & .button {
+        margin-top: 10px;
+        width: 100%;
+        height: 50px;
+        font-size: 23px;
+        color: white;
+    }
+}
+
+
+
+@media screen and (min-width: 600px) {
+    .login-container {
+        width: 45%;
+        margin: 0 auto;
+        min-height: 90vh;
     }
 }
