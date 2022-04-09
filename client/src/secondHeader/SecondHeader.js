@@ -1,82 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Button from '@mui/material/Button';
-import { orange } from '@mui/material/colors';
 import './SecondHeader.scss';
+import {createUseStyles} from 'react-jss';
 
-function SecondHeader() {
-
-    const primary = orange['A700'];
-    const [isSignedIn, setSignIn] = useState(false);
-
-    useEffect(() => {
-        let token = localStorage.getItem('token');
-
-        if (token) {
-            setSignIn(true);
-        } else {
-            setSignIn(false);
+const SecondHeader = ({ color, buttons }) => { //Colors: #FF9466 / #8DA7B2
+  
+    const styles = createUseStyles({
+        student : {
+          border : '2px solid green',
+          width: '40%',
+          listStyleType:'none'
+        },
+       
+        studentDetails : {
+          color : 'blue',
+          fontSize : '23px'
         }
-    }, [])
-
-    let data = {
-        "secondHeader": {
-            "color": "black",
-            "background-color": "#FF9466",
-            "links": [
-                {
-                    "name": "",
-                    "diaplayName": "סיפורים",
-                    "rout": "/",
-                },
-                {
-                    "name": "",
-                    "diaplayName": "ציטוטים",
-                    "rout": "/",
-                }
-            ],
-            "linksSignedIn": [
-                {
-                    "name": "",
-                    "diaplayName": "מאגר סיפורים",
-                    "rout": "/",
-                },
-                {
-                    "name": "",
-                    "diaplayName": "ציטוטים",
-                    "rout": "/",
-                },
-                {
-                    "name": "",
-                    "diaplayName": "קריאת סיפור",
-                    "rout": "/",
-                },
-
-            ]
-        }
-    }
-
-    return (
+      })
+      
+      return (
         <div className="SecondHeader">
-            <ul id="buttons" className={isSignedIn ? "SignedIn" : "SignedOut"}>
-                {isSignedIn ?
-                    data.secondHeader.linksSignedIn.map((link, index) =>
-                        <li>
-                            <Button className="Button" href={link.rout}>
-                                {link.diaplayName}
-                            </Button>
-                        </li>)
-                    :
-                    data.secondHeader.links.map((link, index) =>
-                        <li>
-                            <Button className="Button" href={link.rout}>
-                                {link.diaplayName}
-                            </Button>
-                        </li>)}
+            <ul id="buttons" className={styles}>
+                {buttons.map((button, index) =>
+                    <li>
+                        <Button className="Button" href={button.rout} color="success">
+                            {button.name}
+                        </Button>
+                    </li>)}
             </ul>
         </div>
     );
-
 }
-
 
 export default SecondHeader;

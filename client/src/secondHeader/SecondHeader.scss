@@ -10,33 +10,34 @@
 
     #buttons li {
         display: inline;
+        padding   : 0px 10px 0px 10px;
     }
 
-    #buttons .Button {
-        color        : black;
-        border-radius: 4px;
-        width: 172.33px;
-        height: 28px;
-        padding: 23px;
-        // margin: 10px;
-        font-family: 'Rubik';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 28px;
+    li::before {
+        display: inline !important;
+        border-style: none !important;
     }
 
-    .singedOut .Button:hover {
-        background-color: #8DA7B2;
-    }
+    // #buttons .Button {
+    //     color        : black;
+    //     border-radius: 4px !important;
+    //     width: 172.33px;
+    //     height: 28px;
+    //     padding: 23px;
+    //     font-family: 'Rubik';
+    //     font-style: normal;
+    //     font-weight: 500;
+    //     font-size: 14px;
+    // }
 
-    .signedIn .Button:hover {
-        background-color: #FF9466;
+    #buttons .Button:hover {
+        background-color: red;
     }
 
     @media all and (max-width: 600px), (max-height: 550px) {
     
         text-align: center;
+        height: 28px;
 
         #buttons {
             display: table;
@@ -49,7 +50,7 @@
         }
 
         #buttons .Button {
-            display: block;
+            display: flex;
             text-align: center;
             width: 100%;
             border-radius: 6px;
