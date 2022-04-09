@@ -1,41 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Macondo&family=Rubik:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@700&family=Rubik:wght@400;700&display=swap');
 *img {
   width: 100%;
 }
 .collections-comp {
+  font-family: 'Rubik', sans-serif;
   background-color: #e5e5e5;
-  min-width: 100vw;
   overflow-x: hidden;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 1.25rem;
-  padding: 2.5rem 0;
+  display: grid;
+  grid-gap: 1.25rem;
+  padding: 1.25rem;
+  grid-template-columns: repeat(2, 1fr);
+  direction: rtl;
+
+  /* grid-template-columns: repeat(auto-fit, minmax(10.2rem, 1fr)); */
 }
 
+@media (min-width: 720px) {
+  .collections-comp {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 1150px) {
+  .collections-comp {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media (min-width: 1400px) {
+  .collections-comp {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media (min-width: 1800px) {
+  .collections-comp {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
 .collections-categoryCard {
-  display: flex;
-  align-items: flex-end;
-  flex-direction: column;
-  justify-content: space-around;
-  flex: 0 1 10rem;
-  width: 10.2rem;
   height: 7.125rem;
   border-radius: 0.25rem;
   cursor: pointer;
   background-color: #e2e1df;
   overflow: hidden;
   position: relative;
-  margin-right: 0.4rem;
 }
-
+@media (min-width: 720px) {
+  .collections-categoryCard {
+    height: 8.6rem;
+  }
+}
+@media (min-width: 1150px) {
+  .collections-categoryCard {
+    height: 10rem;
+  }
+}
+@media (min-width: 1400px) {
+  .collections-categoryCard {
+    height: 11.5rem;
+  }
+}
+@media (min-width: 1800px) {
+  .collections-categoryCard {
+    height: 13rem;
+  }
+}
 .categoryCard-titleImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .categoryCard-titleText {
   background-color: #105e7d;
   opacity: 80%;
@@ -45,11 +78,21 @@
   position: absolute;
   bottom: 0;
 }
+@media (min-width: 1150px) {
+  .categoryCard-titleText {
+    height: 2.5625rem;
+  }
+}
 .categoryCard-titleText h6 {
   color: white;
   text-align: center;
   line-height: 200%;
   font-size: 0.875rem;
-  font-family: 'Rubik', sans-serif;
   margin: auto;
+}
+@media (min-width: 1150px) {
+  .categoryCard-titleText h6 {
+    font-weight: 700;
+    font-size: 1.375rem;
+  }
 }
