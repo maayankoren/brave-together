@@ -1,29 +1,35 @@
 import React from "react";
 import Button from '@mui/material/Button';
 import './SecondHeader.scss';
-import {createUseStyles} from 'react-jss';
+import { createUseStyles } from 'react-jss';
 
 const SecondHeader = ({ color, buttons }) => { //Colors: #FF9466 / #8DA7B2
-  
+
     const styles = createUseStyles({
-        student : {
-          border : '2px solid green',
-          width: '40%',
-          listStyleType:'none'
-        },
-       
-        studentDetails : {
-          color : 'blue',
-          fontSize : '23px'
+        button: {
+            color        : 'black',
+            borderRadius: '4px !important',
+            width: '172.33px',
+            height: '28px',
+            padding: '23px',
+            fontFamily: 'Rubik',
+            fontStyle: 'normal',
+            fontWeight: '500',
+            fontSize: '14px',
+            '&:hover': {
+                backgroundColor: '#FF9466'
+            }
         }
-      })
-      
-      return (
+    })
+
+    const classes = styles();
+
+    return (
         <div className="SecondHeader">
-            <ul id="buttons" className={styles}>
+            <ul id="buttons">
                 {buttons.map((button, index) =>
                     <li>
-                        <Button className="Button" href={button.rout} color="success">
+                        <Button className={classes.button} href={button.rout}>
                             {button.name}
                         </Button>
                     </li>)}
