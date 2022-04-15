@@ -1,6 +1,5 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import SecondHeader from '../secondHeader/SecondHeader';
 import './homepage.scss';
 
 

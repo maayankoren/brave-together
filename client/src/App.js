@@ -25,7 +25,7 @@ import ProtectedRoute from './protectedRoute/ProtectedRoute';
 import Quotes from './quotes/Quotes';
 import StoryCheckNew from './storyCheckNew/StoryCheckNew';
 import Collections from './collections/Collections';
-import SecondHeader from './secondHeader/SecondHeader';
+
 function App() {
   return (
     <BrowserRouter>
@@ -45,7 +45,6 @@ function App() {
         <Route exact path='/login' component={LoginSignup} />
         <Route exact path='/signup' render={()=><LoginSignup isSignup={true}></LoginSignup>} />
         <Route exact path='/quotes' component={Quotes} />
-        <Route exact path='/secondHeader' component={SecondHeader} />
         <Route path='*' component={() => '404 Not Found'} />
       </Switch>
       {/* <Footer></Footer> */}
