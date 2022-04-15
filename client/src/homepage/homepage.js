@@ -83,7 +83,6 @@ function Homepage() {
 
     return (
         <div className='homepage-container' dir="rtl">
-            <SecondHeader buttons={[{name: 'מאגר סיפורים', rout: '/about'}, {name: 'ציטוטים', rout: '/about'}]} color={'red'} />
             <h1 className='header' style={{ "margin-bottom": "10px" }}>
                 <img src="/logo1.png" alt="logo" width="220px" height="90px" style={{ "margin-top": "30px", "margin-bottom": "50px" }} />
                 <br />
