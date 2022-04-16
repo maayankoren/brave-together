@@ -3,8 +3,7 @@ import Button from '@mui/material/Button';
 import './SecondHeader.scss';
 
 function SecondHeader({ color, buttons }) {
-    //colors: orange / blue, buttons: an array of buttons with the attributes 'name' and 'rout'
-    //Example: <SecondHeader buttons={[{name: 'מאגר סיפורים', rout: '/about'}, {name: 'ציטוטים', rout: '/about'}]} color='blue' />
+    //color: orange / blue, buttons: an array of buttons with attributes 'name' and 'rout'
 
     return (
         <div className="SecondHeader">
