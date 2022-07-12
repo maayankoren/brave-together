@@ -3,92 +3,120 @@
 }
 .template-edit-container {
   direction: rtl;
-  height: calc(100vh - 56px);
+  height: 100vh;
+  padding-top: 56px;
   width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
 
-  > * {
-    grid-column: 2;
-  }
-
-  .btns-container {
-    position: fixed;
-    top: 56px;
-    width: 100%;
-    grid-column: 1/-1;
-    display: flex;
-    justify-content: space-between;
-    height: 60px;
-    background: rgba(29, 29, 29, 0.7);
-    padding: 5px 20px 0;
-    button {
-      font-size: 14px;
-      border: 0;
-      background: none;
-      color: white;
-      padding: 0;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-      &:first-child {
-        .img-container {
-          width: 26px;
-        }
-      }
-      .img-container {
-        height: 20px;
-        width: 26px;
-        display: grid;
-        place-content: center;
-
-        img {
-          height: 100%;
-          width: 100%;
-          filter: brightness(0) invert(1);
-        }
-      }
-    }
+  @media (min-width: 820px) {
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-evenly;
+    background: #fff;
+    padding: 0;
   }
 
   .canvas-container {
-    grid-column: 1/-1;
-    grid-row: 2;
     width: 100%;
     height: calc(100vh - 216px);
     background: gray;
     cursor: grab;
+    position: relative;
+    @media (min-width: 820px) {
+      width: 45%;
+      height: calc(100vh - 320px);
+      position: relative;
+      // bottom: 55px;
+    }
+    .btns-container {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      grid-column: 1/-1;
+      display: flex;
+      justify-content: space-between;
+      height: 60px;
+      background: rgba(29, 29, 29, 0.7);
+      padding: 5px 20px 0;
+      a,
+      a:active,
+      a:hover,
+      a:focus {
+        text-decoration: none;
+        color: inherit;
+      }
+      button {
+        height: 100%;
+        font-size: 14px;
+        border: 0;
+        background: none;
+        color: white;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        .img-container {
+          height: 20px;
+          width: 26px;
+          display: grid;
+          place-content: center;
+
+          img {
+            height: 100%;
+            width: 100%;
+            filter: brightness(0) invert(1);
+          }
+        }
+      }
+      @media (min-width: 820px) {
+        display: none;
+      }
+    }
+    .btns-container-2 {
+      position: absolute;
+      bottom: 12px;
+      width: 100%;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      @media (min-width: 820px) {
+        bottom: -55px;
+      }
+      button {
+        padding: 0;
+        font-size: 1rem;
+        width: 160px;
+        height: 40px;
+        border-radius: 4px;
+        border: 0;
+        font-weight: 500;
+        color: white;
+      }
+      .more-btn {
+        background: #33687d;
+      }
+      .share-btn {
+        background: #cd531f;
+      }
+    }
   }
-  .btns-container-2 {
-    position: absolute;
-    bottom: 172px;
-    width: 100%;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    button {
-      padding: 0;
-      font-size: 1rem;
-      width: 160px;
-      height: 40px;
-      border-radius: 4px;
-      border: 0;
-      font-weight: 500;
-      color: white;
-    }
-    .more-btn {
-      background: #33687d;
-    }
-    .share-btn {
-      background: #cd531f;
-    }
-  }
+
   .tool-bar-container {
     display: fixed;
     bottom: 0;
+
+    @media (min-width: 820px) {
+      width: 40%;
+      min-height: calc(100vh - 250px);
+      position: relative;
+      top: 35px;
+      display: flex;
+      flex-direction: column;
+    }
 
     .tool-options-container {
       display: flex;
@@ -97,6 +125,10 @@
       height: 94px;
       background-color: #525050;
       padding: 0 0 16px;
+      @media (min-width: 820px) {
+        flex: 1;
+        padding: 40px 0;
+      }
       &.frame-options {
         justify-content: flex-end;
         padding: 0 0 21px;
@@ -117,16 +149,28 @@
             font-weight: 500;
           }
         }
+        @media (min-width: 820px) {
+          padding: 0;
+          p {
+            font-size: 1rem;
+          }
+        }
       }
 
       .sub-options-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        @media (min-width: 820px) {
+          flex: 1;
+        }
+
         &.frames-container {
           position: relative;
           top: 11.5px;
         }
+
         .choose-container {
           width: 100%;
           display: flex;
@@ -134,11 +178,25 @@
           gap: 2rem;
           overflow: scroll;
           padding: 5px 12px;
+          @media (min-width: 820px) {
+            overflow: initial;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            padding: 0 42px;
+          }
+
           div {
             min-width: 50px;
             height: 40px;
             background-color: lightgray;
             position: relative;
+            @media (min-width: 820px) {
+              min-width: 60px;
+              aspect-ratio: 1;
+              height: unset;
+              cursor: pointer;
+            }
             &.chosen-sub-option {
               position: absolute;
               min-width: 60px;
@@ -147,6 +205,10 @@
               left: -5px;
               background: transparent !important;
               border: 3px dashed #a7c6d3;
+              @media (min-width: 820px) {
+                min-width: 70px;
+                height: 70px;
+              }
             }
             &.text-option {
               background-color: transparent;
@@ -198,6 +260,9 @@
           img {
             width: 13px;
           }
+          @media (min-width: 820px) {
+            display: none;
+          }
         }
       }
     }
@@ -212,6 +277,10 @@
       padding-bottom: 5px;
       height: 66px;
       background-color: #1d1d1d;
+
+      @media (min-width: 820px) {
+        height: 69px;
+      }
 
       .option {
         cursor: pointer;

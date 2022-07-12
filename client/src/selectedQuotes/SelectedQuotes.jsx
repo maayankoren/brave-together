@@ -2,16 +2,22 @@ import React from 'react'
 import './SelectedQuotes.scss'
 import ExitIcon from './exit-icon.png'
 
-export default function SelectedQuotes({ quotes, onToggleModal, onChooseText }) {
+export default function SelectedQuotes({ quotes, onToggleModal, onChooseText, match, history }) {
+    console.log('quotes', quotes);
+
 
     const handleClick = (e) => {
         onToggleModal();
         onChooseText();
     }
 
-    const onChooseQuote = (quote) => {
-        //move to editor
-        console.log('quote:', quote);
+    const onChooseQuote = (txt) => {
+        if (!txt) return;
+        const { storyId } = match.params;
+        history.push({
+            pathname: '/templateEdit',
+            state: { txt, storyId }
+        })
     }
 
     return (
@@ -38,7 +44,7 @@ export default function SelectedQuotes({ quotes, onToggleModal, onChooseText }) 
 
 function Quote({ quote, onChooseQuote }) {
     return (
-        <div onClick={() => onChooseQuote(quote)} className='quote'>
+        <div onClick={() => onChooseQuote(quote.txt)} className='quote'>
             <p>{quote.txt}</p>
         </div>
     )

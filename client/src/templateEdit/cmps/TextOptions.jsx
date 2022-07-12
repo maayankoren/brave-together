@@ -36,7 +36,7 @@ export const TextOptions = ({ options, setTemplate, template }) => {
                     </div>
                 ))
 
-            case 'size': //What does it mean??
+            case 'size': 
                 return txtSizes.map(size => (
                     <div key={size} className="txt-size"
                         style={{ fontSize: (size + 3) + 'px' }}
@@ -45,8 +45,6 @@ export const TextOptions = ({ options, setTemplate, template }) => {
                         <ChosenSubOption isChosen={+template?.txt.fontSize === +size} />
                     </div>
                 ))
-            case 'effect': //What kind of effects??
-                return colors.map(color => <div key={color}></div>)
         }
     }
 

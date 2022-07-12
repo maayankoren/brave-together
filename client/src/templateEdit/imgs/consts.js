@@ -84,7 +84,6 @@ const options = [
             { type: 'font', name: 'פונט', isChosen: true },
             { type: 'color', name: 'צבע', isChosen: false },
             { type: 'size', name: 'גודל', isChosen: false },
-            { type: 'effect', name: 'אפקטים', isChosen: false }
         ]
     },
     {

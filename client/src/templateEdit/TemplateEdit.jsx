@@ -30,14 +30,16 @@ export const TemplateEdit = () => {
     const location = useLocation()
     const history = useHistory()
 
-    const canvasRef = useRef()
-    const ctxRef = useRef()
+    const canvasRef = useRef(null)
+    const ctxRef = useRef(null)
     const dragRef = useRef({ isDrag: false, startPos: null, elClicked: null })
+    const downloadRef = useRef(null)
+    const containerRef = useRef(null)
 
     useEffect(() => {
         setCanvas()
         const txt = location.state?.txt
-        if(!txt) history.push('/')
+        if (!txt) history.push('/')
         setTemplate(canvasService.getTemplate(txt))
 
         return () => {
@@ -62,8 +64,8 @@ export const TemplateEdit = () => {
         const canvas = canvasRef.current
         if (!canvas) return
         ctxRef.current = canvas.getContext('2d');
-        canvas.width = window.innerWidth
-        canvas.height = window.innerHeight - 216
+        canvas.width = containerRef.current.offsetWidth
+        canvas.height = containerRef.current.offsetHeight
     }
 
     const resizeCanvas = () => {
@@ -82,12 +84,9 @@ export const TemplateEdit = () => {
 
         (background.type === 'color') && canvasService.drawBgcColor(canvas, ctx, background.attr);
         (background.type === 'img') && await canvasService.drawBgcImg(canvas, ctx, background.attr);
-
-        frame && await canvasService.drawFrame(canvas, ctx, frame)
-
-        imgs.length && await canvasService.drawImgs(ctx, imgs)
-
-        txt && canvasService.drawText(canvas, ctx, shouldRecomputeTxtWidth(), txt);
+        (frame) && await canvasService.drawFrame(canvas, ctx, frame);
+        (imgs.length) && await canvasService.drawImgs(ctx, imgs);
+        (txt) && canvasService.drawText(canvas, ctx, shouldRecomputeTxtWidth(), txt);
     }
 
     const onToggleShareModal = () => {
@@ -144,6 +143,11 @@ export const TemplateEdit = () => {
         storageService.saveTempToStorage(template)
     }
 
+    const onDownloadImg = () => {
+        const image = canvasRef.current.toDataURL("image/png")
+        downloadRef.current.href = image;
+    }
+
     const DynamicOptions = () => {
         const props = {
             options: option.subTypes || null,
@@ -168,29 +172,33 @@ export const TemplateEdit = () => {
         <section className="template-edit-container">
 
             <Share canvas={canvasRef.current} isOpen={isShareModalOpen} onClose={onToggleShareModal} />
-            <div className="btns-container">
-                <button onClick={() => history.push(`/testimony/${location.state.storyId}`)}>
-                    <div className="img-container">
-                        <img src={backImg} alt="back" />
-                    </div>
-                    חזרה לסיפור
-                </button>
 
-                <button>
-                    <div className="img-container">
-                        <img src={downloadImg} alt="download" />
-                    </div>
-                    שמור
-                </button>
-            </div>
+            <div className="canvas-container" ref={containerRef}>
+                <div className="btns-container">
+                    <button onClick={() => history.push(`/testimony/${location.state.storyId}`)}>
+                        <div className="img-container">
+                            <img src={backImg} alt="back" />
+                        </div>
+                        חזרה לסיפור
+                    </button>
 
-            <div className="canvas-container">
+                    <a onClick={onDownloadImg} ref={downloadRef} target="_blank" download="Brave-Together.jpg" title="Brave-Together" href='#'>
+                        <button>
+                            <div className="img-container">
+                                <img src={downloadImg} alt="download" />
+                            </div>
+                            שמור
+                        </button>
+                    </a>
+                </div>
+
+
                 <canvas ref={canvasRef}></canvas>
-            </div>
 
-            <div className="btns-container-2">
-                <button className="more-btn">לעיצובים נוספים</button>
-                <button className="share-btn" onClick={onToggleShareModal}>שתף</button>
+                <div className="btns-container-2">
+                    <button className="more-btn">לעיצובים נוספים</button>
+                    <button className="share-btn" onClick={onToggleShareModal}>שתף</button>
+                </div>
             </div>
 
             <div className="tool-bar-container">

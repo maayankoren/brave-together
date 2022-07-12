@@ -28,7 +28,6 @@ const QUOTE = "\""
 
 function getTemplate(txt) {
     let template = storageService.getTempFromStorage();
-    console.log('template', template);
     if (!template || template?.txt?.content !== txt) template = getEmptyTemplate(txt)
     storageService.saveTempToStorage(template)
     return template
@@ -142,22 +141,24 @@ function _drawContentAndGetWidth(txt, { x, y }, ctx, canvas, lineHeight = 25) {
 
     let line = '';
     words.forEach((word, idx) => {
-        if (!idx) line += QUOTE
+        if (!idx && word.charAt(0) !== QUOTE) line += QUOTE
         const testLine = line + word + ' ';
         const { width } = ctx.measureText(testLine)
         if (width > maxWidth && idx > 0) {
-            x = _getPosCenter(line, ctx, canvas)
-            gLines.push({ x, y, width: ctx.measureText(line).width, size: lineHeight, txt: line })
-            ctx.fillText(line, x, y);
+            _drawLine(line, ctx, canvas, y, lineHeight)
             line = word + ' ';
             y += +lineHeight;
         } else line = testLine;
     })
-    line = line + QUOTE
-    x = _getPosCenter(line, ctx, canvas)
-    gLines.push({ x, y, width: ctx.measureText(line).width, size: lineHeight, txt: line })
+    if (line.charAt(line.length - 1) !== QUOTE) line += QUOTE
+    _drawLine(line, ctx, canvas, y, lineHeight)
     storageService.saveLinesToStorage(gLines)
-    ctx.fillText(line, x, y);
+}
+
+function _drawLine(line, ctx, canvas, posY, lineHeight) {
+    const posX = _getPosCenter(line, ctx, canvas)
+    gLines.push({ x: posX, y: posY, width: ctx.measureText(line).width, size: lineHeight, txt: line })
+    ctx.fillText(line, posX, posY);
 }
 
 function _reDrawContent(ctx) {
@@ -177,25 +178,40 @@ function drawBgcColor(canvas, ctx, color) {
 }
 
 async function drawBgcImg(canvas, ctx, src) {
-    const imgToDraw = new Image()
-    imgToDraw.src = require('../' + src).default;
-    ctx.drawImage(imgToDraw, 0, 0, canvas.width, canvas.height)
+    return new Promise(res => {
+        const imgToDraw = new Image()
+        imgToDraw.src = require('../' + src).default;
+        // imgToDraw.onload = () => {
+        ctx.drawImage(imgToDraw, 0, 0, canvas.width, canvas.height)
+        res()
+        // }
+    })
 }
 
 async function drawImgs(ctx, imgs) {
-    imgs.forEach(img => {
-        const { src, pos, size } = img
-        const imgToDraw = new Image()
-        imgToDraw.src = require('../' + src).default;
-        ctx.drawImage(imgToDraw, pos.x, pos.y, size, size)
+    return new Promise(res => {
+        imgs.forEach((img, idx) => {
+            const { src, pos, size } = img
+            const imgToDraw = new Image()
+            imgToDraw.src = require('../' + src).default;
+            // imgToDraw.onload = () => {
+            ctx.drawImage(imgToDraw, pos.x, pos.y, size, size)
+            if (idx === imgs.length - 1) res()
+            // }
+        })
+        gImgs = imgs
     })
-    gImgs = imgs
 }
 
 async function drawFrame(canvas, ctx, src) {
-    const imgToDraw = new Image()
-    imgToDraw.src = require('../' + src).default;
-    ctx.drawImage(imgToDraw, -5, 0, canvas.width + 5, canvas.height)
+    return new Promise(res => {
+        const imgToDraw = new Image()
+        imgToDraw.src = require('../' + src).default;
+        // imgToDraw.onload = () => {
+        ctx.drawImage(imgToDraw, -5, 0, canvas.width + 5, canvas.height)
+        res()
+        // }
+    })
 }
 
 //SETTERS
