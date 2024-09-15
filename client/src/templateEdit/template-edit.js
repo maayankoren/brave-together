@@ -1,28 +1,15 @@
 import React from 'react';
 import * as htmlToImage from 'html-to-image';
-import mock from './mock';
 import Draggable from 'react-draggable';
+import { CompactPicker } from 'react-color';
+import Select from 'react-select';
 
+import mock from './mock';
 import './template-edit.scss';
 import BackButton from '../backButton/backButton';
-
-// https://codepen.io/sosuke/pen/Pjoqqp
-
-const images = [
-    'images/template-images/Candle.png',
-    // 'images/template-images/davivstar.icon-pic.png',
-    'images/template-images/flower-01.png',
-    'images/template-images/flower-02-01.png',
-    'images/template-images/olive-leaf-04.png',
-
-    // 'images/template-images/flower-03-01-01.png',
-    'images/template-images/hand-01.png',
-    'images/template-images/hands-01.png',
-    'images/template-images/paperboat-01.png',
-    'images/template-images/star-of-david-01.png',
-]
-
-const colors = ['#C2DDC8', '#99BFB3', '#E2C547', '#CDD1CC', '#ACACAC', '#D9C1B8', '#D97373', '#2E5559']
+// import { Constants } from '../assets';
+import { Constants } from '../assets/consts';
+// import colored from consts} ;
 
 const closeButtonIcon = 'images/icons/CloseIcon.png'
 const logoButtonIcon = 'images/template-images/logo-05.png'
@@ -34,18 +21,21 @@ class TemplateEdit extends React.Component {
         this.text = this.props.history.location.state.template.text;
         this.chosenTemplate = {};
         this.options = {
-            colors: colors,
-            images: images
+            colors: Constants.colors,
+            images: Constants.images,
+            backgrounds: Constants.backgrounds,
+            fonts: Constants.fonts
         }
 
         this.state = {
             chosenOption: '',
-            isOptionChosen: false,
             backgroundImageColor: '',
             backgroundImg: '',
             image: '',
             shareUrl: '',
-
+            pickerColor: '#0000',
+            fontSize: '16px',
+            fontFamily: ''
         }
     }
 
@@ -55,7 +45,9 @@ class TemplateEdit extends React.Component {
         this.setState({
             backgroundImg: this.chosenTemplate.backgroundImg,
             backgroundImageColor: this.chosenTemplate.backgroundImageColor,
-            image: this.chosenTemplate.image
+            image: this.chosenTemplate.image,
+            fontFamily: this.chosenTemplate.fontFamily,
+            fontSize: this.chosenTemplate.fontSize
         })
     }
 
@@ -68,6 +60,8 @@ class TemplateEdit extends React.Component {
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
             backgroundColor: this.state.backgroundImageColor,
+            fontFamily: this.state.fontFamily,
+            fontSize: this.state.fontSize
             // display: 'flex'
         }
     }
@@ -85,12 +79,20 @@ class TemplateEdit extends React.Component {
     }
 
 
+    getFontStyle = () => {
+        return {
+            fontSize: this.state.fontSize,
+            fontWeight:"500",
+            direction:"rtl"
+        }
+    }
+
     getOptionStyle = (chosenOption, option) => {
         const style = {
             width: '70px',
             height: '70px',
             marginLeft: '5px',
-            marginBottom: '5px'
+            marginBottom: '15px'
         };
         switch (chosenOption) {
             case 'colors':
@@ -102,6 +104,22 @@ class TemplateEdit extends React.Component {
                 style.backgroundSize = 'contain';
                 style.backgroundColor = '#ffffff';
                 style.backgroundPosition = 'center';
+                break;
+            case 'backgrounds':
+                style.backgroundImage = `url(${option})`;
+                style.width = '100px';
+                style.height = '100px';
+                style.backgroundRepeat = 'no-repeat';
+                style.backgroundSize = 'cover';
+                style.backgroundPosition = 'center';
+                break;
+            case 'fonts':
+                style.backgroundImage = `url(${option})`;
+                style.width = '150px';
+                style.height = '100px';
+                style.backgroundSize = 'contain';
+                style.backgroundPosition = 'center';
+                break;    
             default:
                 break;
         }
@@ -109,14 +127,38 @@ class TemplateEdit extends React.Component {
         return style;
     }
 
+    setBackgroundColor = (color) => {
+        this.setState({ backgroundImageColor: color, backgroundImg: ''});
+    }
+
+    getFontFamily = (option) => {
+        // console.log(option);
+
+        let temp = option.split("/");
+        let arr = temp[temp.length -1 ]
+        let temp2 = arr.split(".")
+        return(temp2[0])
+    }
+
+    handleFontChange = (option) => {
+        this.setState({ fontSize: option })
+        console.log(option)
+    }
+
     onOptionStyleClick = (chosenOption, option) => {
 
         switch (chosenOption) {
             case 'colors':
-                this.setState({ backgroundImageColor: option });
+                this.setState({ backgroundImageColor: option, backgroundImg: "" });
                 break;
             case 'images':
                 this.setState({ image: option });
+                break;
+            case 'backgrounds':
+                this.setState({ backgroundImg: option });
+                break;
+            case 'fonts':
+                this.setState({ fontFamily: this.getFontFamily(option)})
                 break;
             default:
                 break;
@@ -128,7 +170,11 @@ class TemplateEdit extends React.Component {
             <div className='drawer-content'>
                 <div className='drawer-content-header'>
                     <span className='drawer-content-close' style = {{backgroundImage: `url(${closeButtonIcon})`}} onClick={() => this.setState({ isOptionChosen: false })}/>
-                    <span className='drawer-content-title'> {this.state.chosenOption === 'colors' ? 'צבע' : 'תמונה'}</span>
+                    {/* <span className='drawer-content-title'> {this.state.chosenOption === 'colors' ? 'צבע' : 'תמונה'}</span> */}
+                    <span className='drawer-content-title'> {this.state.chosenOption === 'colors' ? 'צבע' 
+                    : this.state.chosenOption === 'images' ?  'תמונה'
+                    : this.state.chosenOption === 'backgrounds'? 'רקע'
+                    : 'פונט'}</span>
                     
                 </div>
                 <div className='drawer-options'>
@@ -142,7 +188,25 @@ class TemplateEdit extends React.Component {
                                 />
                             );
                         })
-                    }
+                    }   
+                        <div className='colorPicker'>{this.state.chosenOption === 'backgrounds' && 
+                        <CompactPicker
+                        color={this.state.pickerColor}
+                        onChange={ (color) => {
+                            this.setState({ pickerColor: color})
+                            this.setBackgroundColor(color.hex)}}
+                            />}
+                        </div>
+                        <div className='fontSizes'>{this.state.chosenOption === 'fonts' && 
+                        <Select options={Constants.options} 
+                        menuPlacement="top"
+                        size={this.state.fontSize}
+                        onChange={(size) => {console.log(size.value)
+                            this.setState({fontSize: size.value}) 
+                        } }
+                        placeholder="גודל" 
+                        />
+                    }</div>
                 </div>
             </div>
         );
@@ -178,51 +242,11 @@ class TemplateEdit extends React.Component {
 
         htmlToImage.toCanvas(document.getElementById(this.imageId))
             .then((canvas) => {
-                // function imageBase64ToBlob(dataURI) {
-                //     var binary = atob(dataURI.split(',')[1]);
-                //     var array = [];
-                //     for(var i = 0; i < binary.length; i++) {
-                //         array.push(binary.charCodeAt(i));
-                //     }
-                //     return new Blob([new Uint8Array(array)], {type: 'image/png'});
-                // }
-                // // document.body.appendChild(canvas);
-                // console.log('canvas: ', canvas.toDataURL())
-                // const blob = imageBase64ToBlob(canvas.toDataURL());
-
-                // this.setState({shareUrl: dataUrl})
-
-                // this.props.history.push({
-                //     pathname: `/share`,
-                //     state:
-                //     {
-                //         shareUrl: dataUrl,
-                //     }
-                // })
             });
-
-
-        // htmlToImage.toJpeg(document.getElementById(this.imageId), { quality: 0.95 })
-        // .then((dataUrl) => {
-        //     this.setState({shareUrl: dataUrl})
-
-        //     this.props.history.push({
-        //         pathname: `/share`,
-        //         state:
-        //         {
-        //             shareUrl: dataUrl,
-        //         }
-        //     })
-        // });
 
 
         htmlToImage.toPng(document.getElementById(this.imageId))
             .then((dataUrl) => {
-                // var link = document.createElement('a');
-                // link.download = 'my-image-name.png';
-                // link.href = dataUrl;
-                // // link.click();
-                // return dataUrl;
 
                 this.setState({ shareUrl: dataUrl })
 
@@ -240,7 +264,7 @@ class TemplateEdit extends React.Component {
     }
 
     getDrawerContent = () => {
-        const add = 'images/icons/add.png';
+        const download = 'images/icons/download.png';
         const colorFill = 'images/icons/color-fill.png';
         const image = 'images/icons/imgs.png';
         const font = 'images/icons/font.png';
@@ -249,14 +273,15 @@ class TemplateEdit extends React.Component {
             <div className='drawer-content'>
                 <div className='edit-options'>
                     <div>
-                        <div className='edit-option' style={{ backgroundImage: `url(${add})` }}/>
-                        <div className='edit-option-text'>הוספה</div>
+                        <div className='edit-option' style={{ backgroundImage: `url(${download})` }}
+                            onClick={() => this.saveImage()}/>
+                        <div className='edit-option-text'>הורדה</div>
                     </div>
 
                     <div>
-                        <div className='edit-option' style={{ backgroundImage: `url(${colorFill})` }}
-                            onClick={() => this.getContentOptions('colors')} />
-                        <div className='edit-option-text'>צבע</div>
+                        <div className='edit-option' style={{ backgroundImage: `url(${font})` }}
+                            onClick={() => this.getContentOptions('fonts')} />
+                        <div className='edit-option-text'>פונט</div>
                     </div>
 
                     <div>
@@ -266,16 +291,14 @@ class TemplateEdit extends React.Component {
                     </div>
 
                     <div>
-                        <div className='edit-option' style={{ backgroundImage: `url(${font})` }} />
-                        <div className='edit-option-text'>פונט</div>
+                        <div className='edit-option' style={{ backgroundImage: `url(${colorFill})` }} 
+                        onClick={() => this.getContentOptions('backgrounds')}/>
+                        <div className='edit-option-text'>רקעים</div>
                     </div>
                 </div>
                 
                 <div className='share-buttons'>
                     <div onClick={this.shareImg}>שתפו</div>
-                </div>
-                <div className='save-buttons'>
-                    <div onClick={this.saveImage}>שמרו</div>
                 </div>
             </div>
         );
@@ -283,16 +306,17 @@ class TemplateEdit extends React.Component {
 //style={{backgroundImage: `url(${logoButtonIcon})`, width:"50px", height:"50px"}}
     render() {
         return (
+            
             <div className='template-edit-container'>
                 <BackButton history={{...this.props.history}}/>
-                <div className='template-edit-title'>עצבו את מסר הגבורה שלכם.ן</div>
+                <div className='template-edit-title'>עצבו את מסר הגבורה שלכם</div>
                 <div className='image-container'>
                     <div className='image-body' id={this.imageId} style={this.getBGStyle()}>
-                        <Draggable>
-                            <div style={this.getImgStyle()}></div>
+                        <Draggable bounds={{top: -50, left: -50, right: 200, bottom: 200}}>
+                              <div style={this.getImgStyle()}></div>
                         </Draggable>
-                        <Draggable>
-                            <div style={{fontSize:"16px", fontWeight:"700", direction:"rtl"}}>{this.text}</div>
+                        <Draggable bounds={{top: -150, left: -100, right: 100, bottom: 100}}>
+                            <div style={this.getFontStyle()}>{this.text}</div>
                         </Draggable>
                         {/* <img src={logoButtonIcon} /> */}
                         <div style={{backgroundImage: `url(${logoButtonIcon})`, width: '60%',
@@ -306,10 +330,6 @@ class TemplateEdit extends React.Component {
                     {!this.state.isOptionChosen && this.getDrawerContent()}
                     {this.state.isOptionChosen && this.renderSpecificOptions()}
                 </div>
-                {/* <div className="fb-share-button" 
-                    data-href="https://s3.amazonaws.com/team-23/test.png"
-                    data-layout="button_count">
-                    </div> */}
             </div>
         )
     }
